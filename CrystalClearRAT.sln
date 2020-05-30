@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalClearRAT", "CrystalClearRAT\CrystalClearRAT.csproj", "{4113F94F-ADA2-4C7A-B100-48A7EF1773FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zombie", "Zombie\Zombie.csproj", "{ABA346E2-890C-43E9-BB85-930AC3EF00ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4113F94F-ADA2-4C7A-B100-48A7EF1773FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4113F94F-ADA2-4C7A-B100-48A7EF1773FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4113F94F-ADA2-4C7A-B100-48A7EF1773FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4113F94F-ADA2-4C7A-B100-48A7EF1773FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABA346E2-890C-43E9-BB85-930AC3EF00ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA346E2-890C-43E9-BB85-930AC3EF00ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA346E2-890C-43E9-BB85-930AC3EF00ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA346E2-890C-43E9-BB85-930AC3EF00ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB973EB1-CECC-4C38-8798-A94F12431B12}
+	EndGlobalSection
+EndGlobal
