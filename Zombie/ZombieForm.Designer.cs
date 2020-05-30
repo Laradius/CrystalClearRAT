@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(507, 374);
             this.Name = "ZombieForm";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.ZombieForm_Load);
             this.ResumeLayout(false);
 
         }
