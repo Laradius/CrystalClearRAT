@@ -27,13 +27,19 @@ namespace Zombie
 
         private void ZombieForm_Load(object sender, EventArgs e)
         {
-            Client.Start("192.168.0.14", 1337);
+            Client.Start("192.168.0.245", 1337);
 
             Client.Send(Encoding.UTF8.GetBytes("abc"));
             Client.Send(Encoding.UTF8.GetBytes("abcd"));
+            //   Client.Debug();
 
             // Client.Send(Encoding.UTF8.GetBytes("Reliable"));
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //  Client.Debug();
         }
     }
 }

