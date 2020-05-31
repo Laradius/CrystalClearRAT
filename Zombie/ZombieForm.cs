@@ -24,9 +24,7 @@ namespace Zombie
 
         private void ZombieForm_Load(object sender, EventArgs e)
         {
-            Console.WriteLine(RemoteCMD.ExecuteCommand("notepad.exe"));
-            Console.WriteLine(RemoteCMD.ExecuteCommand("asf"));
-            Console.WriteLine(RemoteCMD.ExecuteCommand("echo"));
+
         }
     }
 }
