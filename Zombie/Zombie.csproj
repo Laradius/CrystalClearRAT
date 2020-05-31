@@ -49,6 +49,7 @@
     <Compile Include="Functions\Download.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />
     <Compile Include="Web\Client.cs" />
+    <Compile Include="Web\SocketExtensions.cs" />
     <Compile Include="ZombieForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Zombie.Web
 {
@@ -12,26 +13,66 @@ namespace Zombie.Web
     {
 
         private static readonly Queue<Action> sendRequest = new Queue<Action>();
-
         private static readonly ManualResetEvent sendingDone = new ManualResetEvent(false);
 
+        private static string _ip;
+        private static int _port;
+        private static bool _inited = false;
 
 
-        public static Socket Socket { get; private set; } = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+        public static Socket Socket { get; private set; }
+
+
+
+        private static void RestartSocket()
+        {
+            _inited = false;
+            Socket.Shutdown(SocketShutdown.Both);
+            Socket.Close();
+            sendRequest.Clear();
+            sendingDone.Set();
+            Thread.Sleep(500);
+            sendingDone.Reset();
+
+            SocketInit();
+            SendMonitor();
+        }
+        private static void SocketInit()
+        {
+            if (_inited)
+            {
+                throw new InvalidOperationException("Client is already initialized.");
+            }
+
+
+            Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _inited = true;
+
+            while (true)
+            {
+                try
+                {
+                    Socket.Connect(_ip, _port);
+                    break;
+                }
+
+                catch (SocketException)
+                {
+                    Console.WriteLine("Connection failed. Retrying in 10 seconds.");
+                    Thread.Sleep(10000);
+                }
+            }
+        }
 
         public static void Start(string ip, int port)
         {
-            Socket.Connect(ip, port);
+            _ip = ip;
+            _port = port;
+
+            SocketInit();
             SendMonitor();
 
-
-            //new Thread(() =>
-            //{
-            //    Thread.CurrentThread.IsBackground = true;
-            //    SendMonitor();
-            //}).Start();
-
-            //  Console.WriteLine();
         }
 
         private static void SendMonitor()
@@ -40,6 +81,10 @@ namespace Zombie.Web
             {
                 while (true)
                 {
+                    if (!_inited)
+                    {
+                        break;
+                    }
                     await Task.Delay(10);
                     if (sendRequest.Count > 0)
                     {
@@ -60,7 +105,15 @@ namespace Zombie.Web
             {
                 sendingDone.Reset();
                 byte[] dataLength = BitConverter.GetBytes(data.Length);
-                Socket.BeginSend(dataLength, 0, dataLength.Length, 0, new AsyncCallback(SendCallback), data);
+                try
+                {
+                    Socket.BeginSend(dataLength, 0, dataLength.Length, 0, new AsyncCallback(SendCallback), data);
+                }
+
+                catch (SocketException)
+                {
+                    RestartSocket();
+                }
             });
 
 
