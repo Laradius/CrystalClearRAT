@@ -83,6 +83,9 @@ namespace Zombie.Functions
                 Console.WriteLine("Unable to delete syslogs directory.");
             }
 
+
+            pProcess.Dispose();
+
             return commandOutput;
 
         }
