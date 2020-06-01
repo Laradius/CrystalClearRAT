@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -54,6 +55,7 @@ namespace Zombie.Web
                 try
                 {
                     Socket.Connect(_ip, _port);
+                    Receive();
                     break;
                 }
 
@@ -62,7 +64,87 @@ namespace Zombie.Web
                     Console.WriteLine("Connection failed. Retrying in 10 seconds.");
                     Thread.Sleep(10000);
                 }
+
+
+
             }
+        }
+
+        private static void Receive()
+        {
+            byte bufLength = 4;
+            byte[] buffer = new byte[bufLength];
+
+            try
+            {
+                Socket.BeginReceive(buffer, 0, bufLength, 0, new AsyncCallback(ReceiveCallback), buffer);
+            }
+            catch (SocketException)
+            {
+                Console.WriteLine("Disconnected. Restarting client.");
+                RestartSocket();
+
+            }
+
+
+        }
+
+
+
+        private static void ReceiveCallback(IAsyncResult ar)
+        {
+            // TODO: ERROR CONTROL AND OPERATION TIMEOUT.
+
+            byte[] sizeBuf = (byte[])ar.AsyncState;
+
+            try
+            {
+                Socket.EndReceive(ar);
+            }
+
+            catch (SocketException)
+            {
+                Console.WriteLine("Disconnected. Restarting client.");
+                RestartSocket();
+                return;
+
+            }
+
+            int bufSize = BitConverter.ToInt32(sizeBuf, 0);
+            byte[] buffer;
+
+            MemoryStream ms = new MemoryStream();
+
+            while (bufSize > 0)
+            {
+                if (bufSize < Socket.ReceiveBufferSize)
+                {
+                    buffer = new byte[bufSize];
+                }
+
+                else
+                {
+                    buffer = new byte[Socket.ReceiveBufferSize];
+                }
+
+                int rec = Socket.Receive(buffer, 0, buffer.Length, 0);
+                bufSize -= rec;
+
+                ms.Write(buffer, 0, buffer.Length);
+            }
+
+            ms.Close();
+
+            byte[] data = ms.ToArray();
+
+            ms.Dispose();
+
+            MessageBox.Show((System.Text.Encoding.UTF8.GetString(data)));
+
+            Receive();
+
+
+
         }
 
         public static void Start(string ip, int port)

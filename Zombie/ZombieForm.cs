@@ -34,7 +34,7 @@ namespace Zombie
         private void button1_Click(object sender, EventArgs e)
         {
            // throw new System.Net.Sockets.SocketException();
-            Client.Send(Encoding.UTF8.GetBytes("abc"));
+            Client.Send(Encoding.UTF8.GetBytes("Hello Server"));
         }
     }
 }
