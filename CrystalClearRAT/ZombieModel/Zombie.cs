@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CrystalClearRAT.ZombieModel
 {
-    class Zombie
+    public class Zombie
     {
         public static List<Zombie> Zombies { get; private set; } = new List<Zombie>();
 
@@ -16,12 +16,20 @@ namespace CrystalClearRAT.ZombieModel
 
         public Socket Socket { get; private set; }
 
+        public bool Disconnected { get; private set; }
+
         public Zombie(string ip, int port, Socket socket)
         {
             IP = ip;
             Port = port;
             Socket = socket;
             Zombies.Add(this);
+        }
+
+        public void Destroy()
+        {
+            Disconnected = true;
+            Zombies.Remove(this);
         }
 
 

