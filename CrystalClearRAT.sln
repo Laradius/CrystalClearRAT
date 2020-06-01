@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalClearRAT", "CrystalC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zombie", "Zombie\Zombie.csproj", "{ABA346E2-890C-43E9-BB85-930AC3EF00ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalRATShared", "CrystalRATShared\CrystalRATShared.csproj", "{C8D762AD-C62D-4C2D-9123-9A90EE48F876}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{ABA346E2-890C-43E9-BB85-930AC3EF00ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABA346E2-890C-43E9-BB85-930AC3EF00ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABA346E2-890C-43E9-BB85-930AC3EF00ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D762AD-C62D-4C2D-9123-9A90EE48F876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D762AD-C62D-4C2D-9123-9A90EE48F876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D762AD-C62D-4C2D-9123-9A90EE48F876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D762AD-C62D-4C2D-9123-9A90EE48F876}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

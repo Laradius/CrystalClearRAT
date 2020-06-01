@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zombie.Web
+namespace CrystalRATShared.Web
 {
     public static class SocketExtensions
     {
@@ -20,4 +20,5 @@ namespace Zombie.Web
                 return true;
         }
     }
+
 }

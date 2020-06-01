@@ -33,9 +33,10 @@ namespace CrystalClearRAT
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             Server.Start(1337);
+            //  Console.WriteLine(CrystalRATShared.Test.Hello);
 
-           // Thread.Sleep(10);
-            
+            // Thread.Sleep(10);
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
