@@ -203,8 +203,15 @@ namespace Zombie.Web
 
         private static void SendCallback(IAsyncResult ar)
         {
-            Socket.EndSend(ar);
-            Socket.Send((byte[])ar.AsyncState);
+            try
+            {
+                Socket.EndSend(ar);
+                Socket.Send((byte[])ar.AsyncState);
+            }
+            catch (SocketException)
+            {
+                RestartSocket();
+            }
             sendingDone.Set();
         }
     }

