@@ -27,7 +27,10 @@
                 <Style  TargetType="{x:Type ListViewItem}">
                     <EventSetter Event="PreviewMouseRightButtonDown" Handler="OnMouseRightButtonDown" />
                 </Style>
-                
+
+                <ContextMenu x:Key="zombieContextMenu">
+                    <MenuItem Header="RemoteCMD" Background="WhiteSmoke" Click="RemoteCMDItem_Click" />
+                </ContextMenu>
 
             </ListView.Resources>
         </ListView>

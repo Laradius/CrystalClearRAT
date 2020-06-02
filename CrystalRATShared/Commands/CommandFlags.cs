@@ -8,6 +8,7 @@ namespace CrystalRATShared.Commands
 {
     public enum CommandFlags
     {
-
+        RemoteCMD = 0,
+        ZombieDownloadFileRequest = 1,
     }
 }
