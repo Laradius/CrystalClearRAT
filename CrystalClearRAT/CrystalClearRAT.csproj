@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Functions\FunctionManager.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />
     <Compile Include="Web\Server.cs" />
     <Compile Include="Web\StateObject.cs" />
