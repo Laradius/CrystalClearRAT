@@ -1,0 +1,14 @@
+﻿<Window x:Class="CrystalClearRAT.Windows.CommandWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CrystalClearRAT.Windows"
+        mc:Ignorable="d"
+        Title="CommandWindow" Height="100" Width="500" WindowStyle="ToolWindow">
+    <Grid>
+        <TextBox x:Name="commandTextBox" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="355" TextChanged="commandTextBox_TextChanged"/>
+        <Button x:Name="sendButton" Content="Send" HorizontalAlignment="Left" Margin="370,10,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,-0.566" Height="50" Click="Button_Click" IsEnabled="False"/>
+
+    </Grid>
+</Window>

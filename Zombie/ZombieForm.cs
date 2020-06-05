@@ -27,7 +27,7 @@ namespace Zombie
 
         private void ZombieForm_Load(object sender, EventArgs e)
         {
-            Client.Start("192.168.0.245", 1337);    
+            Client.Start("192.168.0.144", 1337);    
 
         }
 

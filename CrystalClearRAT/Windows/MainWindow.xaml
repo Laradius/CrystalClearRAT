@@ -9,14 +9,24 @@
 
     <Grid Loaded="Grid_Loaded">
 
-        
-        
-        
-        <Button Content="Button" HorizontalAlignment="Left" Margin="631,340,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <ListView x:Name="zombieListView" HorizontalAlignment="Left" Height="140" Margin="129,73,0,0" VerticalAlignment="Top" Width="548">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="15"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="15"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+        <ListView x:Name="zombieListView" Margin="0" Grid.Column="1" Grid.Row="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    
+
                     <WrapPanel>
                         <TextBlock Text="IP: "></TextBlock>
                         <TextBlock Text="{Binding IP}"></TextBlock>
@@ -30,10 +40,14 @@
 
                 <ContextMenu x:Key="zombieContextMenu">
                     <MenuItem Header="RemoteCMD" Background="WhiteSmoke" Click="RemoteCMDItem_Click" />
+                    <MenuItem Header="URL File Download Request" Background="WhiteSmoke" Click="URLDownloadRequest_Click"/>
                 </ContextMenu>
 
             </ListView.Resources>
         </ListView>
+        <ScrollViewer Grid.Row="3" Grid.Column="1">
+            <TextBox IsReadOnly="True" x:Name="commandOutput" Margin="0"  TextWrapping="Wrap" Text="" Background="Black" Foreground="White"/>
+        </ScrollViewer>
 
     </Grid>
 </Window>
