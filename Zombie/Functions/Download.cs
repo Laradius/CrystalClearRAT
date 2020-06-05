@@ -12,7 +12,7 @@ namespace Zombie.Functions
     static class Download
     {
 
-        public static string FromURL(string url, string fileName)
+        public static byte[] FromURL(string url, string fileName)
         {
 
             string result = "Download completed successfully.";
@@ -22,7 +22,7 @@ namespace Zombie.Functions
                 if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(fileName))
                 {
                     result = "No URL or File Name specified.";
-                    return result;
+                    return GenericCommandResult.Generate(result);
                 }
                 try
                 {
@@ -38,7 +38,7 @@ namespace Zombie.Functions
                 }
             }
 
-            return result;
+            return GenericCommandResult.Generate(result);
         }
 
     }
