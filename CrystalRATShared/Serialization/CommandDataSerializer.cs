@@ -13,7 +13,7 @@ namespace CrystalRATShared.Serialization
         public delegate void SerializeArguments(BinaryWriter writer);
         public delegate void CommandHandler(CommandFlags flag, BinaryReader reader);
 
-        public static byte[] Serialize(CommandFlags flag, SerializeArguments args)
+        public static byte[] Serialize(CommandFlags flag, SerializeArguments args = null)
         {
             byte[] data;
 
@@ -22,7 +22,7 @@ namespace CrystalRATShared.Serialization
                 using (BinaryWriter writer = new BinaryWriter(ms))
                 {
                     writer.Write((int)flag);
-                    args(writer);
+                    args?.Invoke(writer);
                 }
 
                 data = ms.ToArray();
@@ -31,7 +31,7 @@ namespace CrystalRATShared.Serialization
             return data;
         }
 
-        public static CommandFlags Deserialize(byte[] input, CommandHandler handler)
+        public static CommandFlags Deserialize(byte[] input, CommandHandler handler = null)
         {
 
             CommandFlags flag;
@@ -42,7 +42,7 @@ namespace CrystalRATShared.Serialization
                 {
 
                     flag = (CommandFlags)reader.ReadInt32();
-                    handler(flag, reader);
+                    handler?.Invoke(flag, reader);
                 }
             }
 

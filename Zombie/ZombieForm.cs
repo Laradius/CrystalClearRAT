@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -27,14 +28,10 @@ namespace Zombie
 
         private void ZombieForm_Load(object sender, EventArgs e)
         {
-            Client.Start("192.168.0.144", 1337);    
 
+            Client.Start("192.168.0.144", 1337);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-           // throw new System.Net.Sockets.SocketException();
-            Client.Send(Encoding.UTF8.GetBytes("Hello Server"));
-        }
+
     }
 }

@@ -169,7 +169,7 @@ namespace Zombie.Web
                     {
                         break;
                     }
-                    await Task.Delay(10);
+                    await Task.Delay(1);
                     if (sendRequest.Count > 0)
                     {
                         sendRequest.Dequeue()();

