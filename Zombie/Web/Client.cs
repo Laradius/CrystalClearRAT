@@ -21,8 +21,7 @@ namespace Zombie.Web
         private static string _ip;
         private static int _port;
         private static bool _inited = false;
-
-
+        private static bool sendMonitorRunning = false;
 
         public static Socket Socket { get; private set; }
 
@@ -37,9 +36,7 @@ namespace Zombie.Web
             sendingDone.Set();
             Thread.Sleep(500);
             sendingDone.Reset();
-
             SocketInit();
-            SendMonitor();
         }
         private static void SocketInit()
         {
@@ -161,24 +158,25 @@ namespace Zombie.Web
 
         private static void SendMonitor()
         {
-            Task.Run(async () =>
-            {
-                while (true)
+            if (!sendMonitorRunning)
+                Task.Run(async () =>
                 {
-                    if (!_inited)
+                    sendMonitorRunning = true;
+                    while (true)
                     {
-                        break;
+                        await Task.Delay(10);
+                        if (sendRequest.Count > 0)
+                        {
+                            sendRequest.Dequeue()();
+                            sendingDone.WaitOne();
+                        }
+                        else break;
                     }
-                    await Task.Delay(1);
-                    if (sendRequest.Count > 0)
-                    {
-                        sendRequest.Dequeue()();
-                        sendingDone.WaitOne();
-                    }
-                }
-            });
+                    sendMonitorRunning = false;
+                });
 
         }
+
 
 
 
@@ -199,6 +197,8 @@ namespace Zombie.Web
                     RestartSocket();
                 }
             });
+
+            SendMonitor();
 
 
         }

