@@ -27,7 +27,7 @@ namespace Zombie.Web
 
 
 
-        private static void RestartSocket()
+        public static void RestartSocket()
         {
             _inited = false;
             Socket.Shutdown(SocketShutdown.Both);

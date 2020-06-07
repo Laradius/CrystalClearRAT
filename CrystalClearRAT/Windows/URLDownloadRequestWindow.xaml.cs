@@ -28,6 +28,12 @@ namespace CrystalClearRAT.Windows
         {
             InitializeComponent();
             this.zombie = zombie;
+            this.zombie.Disconnected += OnDisconnected;
+        }
+
+        private void OnDisconnected(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(() => { this.Close(); });
         }
 
         private void urlTextBox_TextChanged(object sender, TextChangedEventArgs e)

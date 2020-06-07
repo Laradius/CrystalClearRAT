@@ -14,12 +14,14 @@ namespace CrystalClearRAT.ZombieModel
     {
         public static ObservableCollection<Zombie> Zombies { get; private set; } = new ObservableCollection<Zombie>();
 
+        public event EventHandler Disconnected;
+
         public string IP { get; private set; }
         public int Port { get; private set; }
 
         public Socket Socket { get; private set; }
 
-        public bool Disconnected { get; private set; }
+        // public bool Disconnected { get; private set; }
 
 
 
@@ -39,13 +41,14 @@ namespace CrystalClearRAT.ZombieModel
 
         public void Destroy()
         {
-            Disconnected = true;
+            //  Disconnected = true;
 
             App.Current.Dispatcher.Invoke(() =>
             {
                 Zombies.Remove(this);
             });
 
+            Disconnected?.Invoke(this, EventArgs.Empty);
         }
 
 

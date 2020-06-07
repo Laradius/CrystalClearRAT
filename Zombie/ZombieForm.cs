@@ -23,12 +23,10 @@ namespace Zombie
         {
             InitializeComponent();
 
-
         }
 
         private void ZombieForm_Load(object sender, EventArgs e)
         {
-
             Client.Start("192.168.0.144", 1337);
         }
 

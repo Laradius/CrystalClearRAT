@@ -49,9 +49,16 @@ namespace CrystalClearRAT.Windows
             }
             isRunning = true;
             this.zombie = zombie;
+            this.zombie.Disconnected += OnDisconnedted;
             FunctionManager.ImageReceived += OnImageReceived;
             InitializeComponent();
             refreshInterval = int.Parse(intervalTextBox.Text);
+        }
+
+        private void OnDisconnedted(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(() => { this.Close(); });
+
         }
 
         private void OnImageReceived(object sender, EventArgs e)

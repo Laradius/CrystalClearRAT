@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CrystalClearRAT.Functions;
 using CrystalClearRAT.ZombieModel;
+using CrystalRATShared.Commands;
 using CrystalRATShared.Serialization;
 
 namespace CrystalClearRAT.Web
@@ -179,7 +180,11 @@ namespace CrystalClearRAT.Web
 
             ms.Dispose();
 
-            CommandDataSerializer.Deserialize(data, FunctionManager.Process);
+            if (CommandDataSerializer.Deserialize(data, FunctionManager.Process) == CommandFlags.DataCorrupted)
+            {
+                state.Zombie.Destroy();
+                return;
+            }
 
             Receive(state.Zombie);
 

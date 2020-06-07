@@ -8,9 +8,10 @@ namespace CrystalRATShared.Commands
 {
     public enum CommandFlags
     {
-        GenericCommandOutput = 0,
-        RemoteCMD = 1,
-        ZombieDownloadFileRequest = 2,
-        Screenshot = 3,
+        DataCorrupted = 0,
+        GenericCommandOutput = 1,
+        RemoteCMD = 2,
+        ZombieDownloadFileRequest = 3,
+        Screenshot = 4,
     }
 }

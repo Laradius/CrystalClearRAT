@@ -23,6 +23,9 @@ namespace CrystalClearRAT.Functions
         {
             switch (flag)
             {
+                case CommandFlags.DataCorrupted:
+                    Console.WriteLine("Data corrupted. Closing zombie connection");
+                    break;
                 case CommandFlags.GenericCommandOutput:
                     GenericCommandReceived?.Invoke(null, new GenericCommandArgs(reader.ReadString()));
                     break;
@@ -30,8 +33,6 @@ namespace CrystalClearRAT.Functions
                     byte[] img = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
                     ImageReceived?.Invoke(null, new ImageArgs(img));
                     break;
-                default:
-                    throw new ArgumentException("No command corresponding to the given value.");
 
             }
         }
