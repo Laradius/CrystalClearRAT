@@ -90,7 +90,7 @@ namespace CrystalClearRAT
 
         private void SpyMonitorItem_Click(object sender, RoutedEventArgs e)
         {
-            new ScreenCaptureWindow(GetZombieFromMenuItem(sender)).Show();
+            // new ScreenCaptureWindow(GetZombieFromMenuItem(sender)).Show();
         }
     }
 }
