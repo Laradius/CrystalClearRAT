@@ -13,5 +13,6 @@ namespace CrystalRATShared.Commands
         RemoteCMD = 2,
         ZombieDownloadFileRequest = 3,
         Screenshot = 4,
+        Click = 5,
     }
 }

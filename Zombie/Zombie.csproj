@@ -50,11 +50,15 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsInput, Version=1.0.4.0, Culture=neutral, PublicKeyToken=9b287f7dc5073cad, processorArchitecture=MSIL">
+      <HintPath>..\packages\InputSimulator.1.0.4.0\lib\net20\WindowsInput.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Functions\FunctionManager.cs" />
     <Compile Include="Functions\Download.cs" />
     <Compile Include="Functions\GenericCommandResult.cs" />
+    <Compile Include="Functions\MouseOperations.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />
     <Compile Include="Functions\Screenshot.cs" />
     <Compile Include="Web\Client.cs" />

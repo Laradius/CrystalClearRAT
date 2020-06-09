@@ -1,0 +1,32 @@
+﻿<Window x:Class="CrystalClearRAT.Windows.ScreenControlWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CrystalClearRAT.Windows"
+        mc:Ignorable="d"
+        Title="ScreenControlWindow" Height="450" Width="800" Closing="Window_Closing">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Image x:Name="screenImage" Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="1" MouseDown="screenImage_MouseDown"/>
+        <Button x:Name="controlButton" Content="Start" Grid.Column="4" Grid.Row="3" Click="Button_Click"/>
+        <TextBox x:Name="intervalTextBox"  TextWrapping="Wrap" Text="Interval (ms)" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" />
+
+    </Grid>
+</Window>

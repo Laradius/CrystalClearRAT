@@ -46,8 +46,6 @@ namespace CrystalClearRAT.ZombieModel
 
             App.Current.Dispatcher.Invoke(() =>
             {
-                Socket.Shutdown(SocketShutdown.Both);
-                Socket.Close();
                 Server.ClearRequests();
                 Zombies.Remove(this);
             });
