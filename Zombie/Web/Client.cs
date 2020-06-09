@@ -129,7 +129,7 @@ namespace Zombie.Web
                 int rec = Socket.Receive(buffer, 0, buffer.Length, 0);
                 bufSize -= rec;
 
-                ms.Write(buffer, 0, buffer.Length);
+                ms.Write(buffer, 0, rec);
             }
 
             ms.Close();
