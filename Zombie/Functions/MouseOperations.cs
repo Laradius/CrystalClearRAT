@@ -33,10 +33,10 @@ namespace Zombie.Functions
             return (y * 65536) / GetSystemMetrics(SystemMetric.SM_CYSCREEN);
         }
 
-        public static void DoubleLeftClickOnPoint(int x, int y)
+        public static void LeftClickOnPoint(int x, int y)
         {
             inputSimulator.Mouse.MoveMouseTo(CalculateAbsoluteCoordinateX(x), CalculateAbsoluteCoordinateY(y));
-            inputSimulator.Mouse.LeftButtonDoubleClick();
+            inputSimulator.Mouse.LeftButtonClick();
         }
 
 
