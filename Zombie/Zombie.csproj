@@ -59,6 +59,7 @@
     <Compile Include="Functions\Download.cs" />
     <Compile Include="Functions\GenericCommandResult.cs" />
     <Compile Include="Functions\InputControl.cs" />
+    <Compile Include="Functions\Kill.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />
     <Compile Include="Functions\Screenshot.cs" />
     <Compile Include="Helper\MonitorInfo.cs" />

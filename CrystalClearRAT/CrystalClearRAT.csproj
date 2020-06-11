@@ -67,6 +67,7 @@
     <Compile Include="Functions\ControlInput.cs" />
     <Compile Include="Functions\Downlaod.cs" />
     <Compile Include="Functions\FunctionManager.cs" />
+    <Compile Include="Functions\Kill.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />
     <Compile Include="Functions\Screenshot.cs" />
     <Compile Include="Web\Server.cs" />

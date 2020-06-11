@@ -7,7 +7,20 @@
         mc:Ignorable="d"
         Title="CommandWindow" Height="100" Width="500" WindowStyle="ToolWindow">
     <Grid>
-        <TextBox x:Name="commandTextBox" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="355" TextChanged="commandTextBox_TextChanged"/>
-        <Button x:Name="sendButton" Content="Send" HorizontalAlignment="Left" Margin="370,10,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,-0.566" Height="50" Click="Button_Click" IsEnabled="False"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="commandTextBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" TextChanged="commandTextBox_TextChanged"/>
+        <Button x:Name="sendButton" Content="Send" Grid.Row="1" Grid.Column="3" Click="Button_Click" IsEnabled="False"/>
     </Grid>
 </Window>

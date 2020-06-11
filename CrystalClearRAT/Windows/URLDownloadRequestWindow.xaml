@@ -7,10 +7,29 @@
         mc:Ignorable="d"
         Title="URLDownloadRequestWindow" Height="120" Width="500">
     <Grid>
-        <TextBox x:Name="urlTextBox" HorizontalAlignment="Left" Height="50" Margin="10,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" TextChanged="urlTextBox_TextChanged"/>
-        <Button x:Name="sendButton" Content="Send" HorizontalAlignment="Left" Margin="370,29,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="-0.242,-0.566" Height="50" IsEnabled="False" Click="sendButton_Click"/>
-        <TextBox x:Name="fileNameTextBox" HorizontalAlignment="Left" Height="50" Margin="193,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" TextChanged="fileNameTextBox_TextChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="URL:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="193,10,0,0" TextWrapping="Wrap" Text="File name + extension" VerticalAlignment="Top"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        
+        <TextBox x:Name="urlTextBox" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" TextChanged="urlTextBox_TextChanged"/>
+        <Button x:Name="sendButton" Content="Send"  Grid.Row="3" Grid.Column="5" IsEnabled="False" Click="sendButton_Click"/>
+        <TextBox x:Name="fileNameTextBox" TextWrapping="Wrap" Grid.Row="3" Grid.Column="3" TextChanged="fileNameTextBox_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Text="URL:" VerticalAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TextWrapping="Wrap" Text="File name + extension" VerticalAlignment="Center"/>
     </Grid>
 </Window>

