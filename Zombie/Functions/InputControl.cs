@@ -7,10 +7,11 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Threading;
 using WindowsInput;
+using WindowsInput.Native;
 
 namespace Zombie.Functions
 {
-    public static class MouseOperations
+    public static class InputControl
     {
         private static InputSimulator inputSimulator = new InputSimulator();
 
@@ -35,18 +36,26 @@ namespace Zombie.Functions
 
         public static void LeftClickOnPoint(int x, int y)
         {
+            Console.WriteLine(x);
+
             inputSimulator.Mouse.MoveMouseTo(CalculateAbsoluteCoordinateX(x), CalculateAbsoluteCoordinateY(y));
             inputSimulator.Mouse.LeftButtonClick();
         }
 
+       public static void KeyboardPress(int key)
+        {
+            inputSimulator.Keyboard.KeyPress((VirtualKeyCode)key);
+        }
 
         public static MousePoint ConvertScreenPointToCurrent(int x, int oldMaxX, int y, int oldMaxY)
         {
-            int newMaxX = Screen.PrimaryScreen.Bounds.Width;
-            int newMax = Screen.PrimaryScreen.Bounds.Width;
 
-            int convertedX = x * Screen.PrimaryScreen.Bounds.Width / (oldMaxX);
-            int convertedY = y * Screen.PrimaryScreen.Bounds.Height / (oldMaxY);
+
+            int newMaxX = Screen.PrimaryScreen.Bounds.Width;
+            int newMaxY = Screen.PrimaryScreen.Bounds.Height;
+
+            int convertedX = x * newMaxX / (oldMaxX);
+            int convertedY = y * newMaxY / (oldMaxY);
 
             return new MousePoint(convertedX, convertedY);
 

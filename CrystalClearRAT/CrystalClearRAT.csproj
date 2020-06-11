@@ -64,7 +64,7 @@
     </ApplicationDefinition>
     <Compile Include="Event\GenericCommandArgs.cs" />
     <Compile Include="Event\ImageArgs.cs" />
-    <Compile Include="Functions\ControlMouse.cs" />
+    <Compile Include="Functions\ControlInput.cs" />
     <Compile Include="Functions\Downlaod.cs" />
     <Compile Include="Functions\FunctionManager.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />

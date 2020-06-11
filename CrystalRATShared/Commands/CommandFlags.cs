@@ -14,5 +14,6 @@ namespace CrystalRATShared.Commands
         ZombieDownloadFileRequest = 3,
         Screenshot = 4,
         Click = 5,
+        KeyboardKey = 6,
     }
 }

