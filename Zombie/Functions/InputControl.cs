@@ -36,13 +36,11 @@ namespace Zombie.Functions
 
         public static void LeftClickOnPoint(int x, int y)
         {
-            Console.WriteLine(x);
-
             inputSimulator.Mouse.MoveMouseTo(CalculateAbsoluteCoordinateX(x), CalculateAbsoluteCoordinateY(y));
             inputSimulator.Mouse.LeftButtonClick();
         }
 
-       public static void KeyboardPress(int key)
+        public static void KeyboardPress(int key)
         {
             inputSimulator.Keyboard.KeyPress((VirtualKeyCode)key);
         }

@@ -16,7 +16,6 @@ namespace Zombie.Functions
 {
     public static class Screenshot
     {
-
         public static byte[] Take()
         {
             byte[] img;
