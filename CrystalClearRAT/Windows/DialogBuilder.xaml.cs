@@ -30,7 +30,9 @@ namespace CrystalClearRAT.Windows
         public DialogBuilder(Zombie zombie)
         {
             InitializeComponent();
+
             this.zombie = zombie;
+            zombie.Disconnected += OnDisconnected;
 
             List<int> messageBoxButtons = Enum.GetValues(typeof(MessageBoxButtons)).Cast<int>().ToList();
             List<int> messageBoxIcons = Enum.GetValues(typeof(MessageBoxIcon)).Cast<int>().ToList();
@@ -50,7 +52,12 @@ namespace CrystalClearRAT.Windows
 
             iconComboBox.SelectedItem = iconComboBox.Items[0];
             optionsComboBox.SelectedItem = optionsComboBox.Items[0];
-            
+
+        }
+
+        private void OnDisconnected(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(() => { this.Close(); });
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

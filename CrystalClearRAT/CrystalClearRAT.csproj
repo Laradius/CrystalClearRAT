@@ -112,6 +112,9 @@
     <Compile Include="Windows\BuilderWindow.xaml.cs">
       <DependentUpon>BuilderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ChatWindow.xaml.cs">
+      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\CommandWindow.xaml.cs">
       <DependentUpon>CommandWindow.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
     </Compile>
     <Compile Include="ZombieModel\Zombie.cs" />
     <Page Include="Windows\BuilderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ChatWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

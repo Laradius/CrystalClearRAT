@@ -65,6 +65,19 @@ namespace CrystalClearRAT
 
         }
 
+        private void ChatItem_Click(object sender, RoutedEventArgs e)
+        {
+            Zombie z = GetZombieFromMenuItem(sender);
+            if (ChatWindow.ChatOpenedZombies.Contains(z))
+            {
+                MessageBox.Show("Cannot open two separate chatboxes for the same Zombie", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                new ChatWindow(z).Show();
+            }
+        }
+
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
 

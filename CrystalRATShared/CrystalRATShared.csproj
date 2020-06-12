@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CommandFlags.cs" />
+    <Compile Include="EvArgs\MessageArgs.cs" />
+    <Compile Include="Functions\ChatMessage.cs" />
     <Compile Include="Helper\ClientSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\CommandDataSerializer.cs" />

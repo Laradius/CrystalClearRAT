@@ -42,6 +42,7 @@
                     <MenuItem Header="URL File Download Request" Background="WhiteSmoke" Click="URLDownloadRequest_Click"/>
                     <MenuItem Header="Control Screen" Background="WhiteSmoke" Click="SpyMonitorItem_Click"></MenuItem>
                     <MenuItem Header="Create Dialog" Background="WhiteSmoke" Click="DialogItem_Click"></MenuItem>
+                    <MenuItem Header="Chat" Background="WhiteSmoke" Click="ChatItem_Click"></MenuItem>
                     <MenuItem Header="Kill" Background="WhiteSmoke" Click="KillItem_Click"></MenuItem>
                 </ContextMenu>
 

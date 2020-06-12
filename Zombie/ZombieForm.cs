@@ -25,8 +25,11 @@ namespace Zombie
 {
     public partial class ZombieForm : Form
     {
+
+        public static ZombieForm Form { get; set; }
         public ZombieForm()
         {
+            Form = this;
             InitializeComponent();
         }
 

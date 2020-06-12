@@ -1,5 +1,6 @@
 ﻿using CrystalClearRAT.Event;
 using CrystalRATShared.Commands;
+using CrystalRATShared.EvArgs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,7 +18,7 @@ namespace CrystalClearRAT.Functions
 
         public static event EventHandler GenericCommandReceived;
         public static event EventHandler ImageReceived;
-
+        public static event EventHandler MessageReceived;
 
         public static void Process(CommandFlags flag, BinaryReader reader)
         {
@@ -33,6 +34,9 @@ namespace CrystalClearRAT.Functions
                     string id = reader.ReadString();
                     byte[] img = reader.ReadBytes((int)(reader.BaseStream.Length - reader.BaseStream.Position));
                     ImageReceived?.Invoke(null, new ImageArgs(img, id));
+                    break;
+                case CommandFlags.ChatMessage:
+                    MessageReceived?.Invoke(null, new MessageArgs(reader.ReadString(), reader.ReadString()));
                     break;
 
             }
