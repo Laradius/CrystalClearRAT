@@ -19,10 +19,6 @@ namespace Zombie
 
         // Add Closing Prevention
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        static extern bool HideCaret(IntPtr hWnd);
-
-
 
         public static bool IsOpen = false;
         private string id;
@@ -33,7 +29,6 @@ namespace Zombie
             this.id = id;
             FunctionManager.MessageReceived += OnMessageReceived;
             InitializeComponent();
-            HideCaret(chatOutputTextBox.Handle);
         }
 
         private void OnMessageReceived(object sender, EventArgs e)
