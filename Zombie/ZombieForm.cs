@@ -41,6 +41,9 @@ namespace Zombie
         {
             ClientSettings settings;
 
+#if DEBUG
+            settings = new ClientSettings("192.168.0.14", 1337);
+#else
             var assembly = Assembly.GetExecutingAssembly();
             string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith(ClientSettings.SettingsResourceName));
 
@@ -50,6 +53,7 @@ namespace Zombie
                 string result = reader.ReadToEnd();
                 settings = JsonConvert.DeserializeObject<ClientSettings>(result);
             }
+#endif
 
             return settings;
         }
