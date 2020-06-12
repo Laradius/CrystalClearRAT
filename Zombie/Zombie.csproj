@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\Dialog.cs" />
     <Compile Include="Functions\FunctionManager.cs" />
     <Compile Include="Functions\Download.cs" />
     <Compile Include="Functions\GenericCommandResult.cs" />

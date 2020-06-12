@@ -21,7 +21,7 @@ namespace CrystalRATShared.Serialization
 
             using (MemoryStream ms = new MemoryStream())
             {
-                using (BinaryWriter writer = new BinaryWriter(ms))
+                using (BinaryWriter writer = new BinaryWriter(ms, Encoding.UTF8))
                 {
                     writer.Write((int)flag);
                     writer.Write(integrityKey);
@@ -41,7 +41,7 @@ namespace CrystalRATShared.Serialization
 
             using (MemoryStream ms = new MemoryStream(input))
             {
-                using (BinaryReader reader = new BinaryReader(ms))
+                using (BinaryReader reader = new BinaryReader(ms, Encoding.UTF8))
                 {
                     try
                     {

