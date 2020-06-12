@@ -3,11 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CrystalClearRAT"
              StartupUri="Windows/MainWindow.xaml">
-    <Application.Resources>
-        <Style TargetType="{x:Type local:MainWindow}">
-            <Setter Property="Background" Value="#E1E2E1"></Setter>
 
-        </Style>
-        
+
+    <Application.Resources>
+        <ResourceDictionary>
+            
+
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#3F51B5"></Setter>
+                <Setter Property="Foreground" Value="#FFFFFF"></Setter>
+            </Style>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

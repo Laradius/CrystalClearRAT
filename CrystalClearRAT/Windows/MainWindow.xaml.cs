@@ -31,13 +31,14 @@ using CrystalRATShared.Helper;
 using System.IO;
 using Newtonsoft.Json;
 using CrystalClearRAT.Helper;
+using MahApps.Metro.Controls;
 
 namespace CrystalClearRAT
 {
     /// <summary>
     /// Logika interakcji dla klasy MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {

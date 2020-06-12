@@ -1,5 +1,6 @@
 ﻿using CrystalClearRAT.Helper;
 using CrystalRATShared.Helper;
+using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace CrystalClearRAT.Windows
     /// <summary>
     /// Logika interakcji dla klasy BuilderWindow.xaml
     /// </summary>
-    public partial class BuilderWindow : Window
+    public partial class BuilderWindow : MetroWindow
     {
         public BuilderWindow()
         {

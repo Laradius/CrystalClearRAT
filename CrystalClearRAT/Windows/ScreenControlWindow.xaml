@@ -1,11 +1,9 @@
-﻿<Window x:Class="CrystalClearRAT.Windows.ScreenControlWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CrystalClearRAT.Windows"
-        mc:Ignorable="d"
-        Title="ScreenControlWindow" Height="450" Width="800" Closing="Window_Closing" KeyDown="Window_KeyDown">
+﻿<mah:MetroWindow x:Class="CrystalClearRAT.Windows.ScreenControlWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:CrystalClearRAT.Windows" TitleCharacterCasing="Normal"
+        Title="Screen Control" Height="450" Width="800"  WindowTitleBrush="#9b0000" Background="#FFE1E2E1" Closing="Window_Closing" KeyDown="Window_KeyDown">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -30,4 +28,4 @@
         <CheckBox x:Name="keyboardInputCheckBox" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">Send Keyboard Input</CheckBox>
 
     </Grid>
-</Window>
+</mah:MetroWindow>

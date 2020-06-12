@@ -2,6 +2,7 @@
 using CrystalClearRAT.Functions;
 using CrystalClearRAT.Web;
 using CrystalClearRAT.ZombieModel;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,7 @@ namespace CrystalClearRAT.Windows
     /// <summary>
     /// Interaction logic for ScreenControlWindow.xaml
     /// </summary>
-    public partial class ScreenControlWindow : Window
+    public partial class ScreenControlWindow : MetroWindow
     {
 
         int minTimerInterval = 100;

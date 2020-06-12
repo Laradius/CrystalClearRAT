@@ -1,6 +1,7 @@
 ﻿using CrystalClearRAT.Functions;
 using CrystalClearRAT.Web;
 using CrystalClearRAT.ZombieModel;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace CrystalClearRAT.Windows
     /// <summary>
     /// Interaction logic for CommandWindow.xaml
     /// </summary>
-    public partial class CommandWindow : Window
+    public partial class CommandWindow : MetroWindow
     {
 
         private Zombie zombie;
