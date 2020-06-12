@@ -10,20 +10,21 @@
     <Grid Loaded="Grid_Loaded">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="15"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="15"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="15"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
 
-        <ListView x:Name="zombieListView" Margin="0" Grid.Column="1" Grid.Row="2">
+        <ListView x:Name="zombieListView" Margin="0" Grid.Column="1" Grid.Row="2" Background="White">
             <ListView.ItemTemplate>
                 <DataTemplate>
 
@@ -47,9 +48,14 @@
 
             </ListView.Resources>
         </ListView>
-        <ScrollViewer Grid.Row="3" Grid.Column="1">
+        <ScrollViewer Grid.Column="1" Grid.Row="4">
             <TextBox IsReadOnly="True" x:Name="commandOutput" Margin="0"  TextWrapping="Wrap" Text="" Background="Black" Foreground="White"/>
         </ScrollViewer>
+        <Menu Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Top" Grid.Row="0" Background="#FF4527A0" Foreground="White">
+
+            <MenuItem Header="Build File" Click="BuildFileItem_Click">
+            </MenuItem>
+        </Menu>
 
     </Grid>
 </Window>

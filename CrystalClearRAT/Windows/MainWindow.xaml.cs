@@ -104,5 +104,10 @@ namespace CrystalClearRAT
         {
             Server.Send(Kill.Request(), GetZombieFromMenuItem(sender));
         }
+
+        private void BuildFileItem_Click(object sender, RoutedEventArgs e)
+        {
+            new BuilderWindow().Show();
+        }
     }
 }

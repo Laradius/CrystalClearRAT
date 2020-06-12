@@ -88,6 +88,9 @@
     <Compile Include="Helper\ZombieBuilder.cs" />
     <Compile Include="Web\Server.cs" />
     <Compile Include="Web\StateObject.cs" />
+    <Compile Include="Windows\BuilderWindow.xaml.cs">
+      <DependentUpon>BuilderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\CommandWindow.xaml.cs">
       <DependentUpon>CommandWindow.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
       <DependentUpon>URLDownloadRequestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ZombieModel\Zombie.cs" />
+    <Page Include="Windows\BuilderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\CommandWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

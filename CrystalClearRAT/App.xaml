@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:CrystalClearRAT"
              StartupUri="Windows/MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type local:MainWindow}">
+            <Setter Property="Background" Value="#E1E2E1"></Setter>
+
+        </Style>
+        
     </Application.Resources>
 </Application>

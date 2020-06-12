@@ -1,0 +1,38 @@
+﻿<Window x:Class="CrystalClearRAT.Windows.BuilderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CrystalClearRAT.Windows"
+        mc:Ignorable="d"
+        Title="BuilderWindow" Height="300" Width="200">
+    <Grid>
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Content="Build" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="9" Click="Button_Click"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="1" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Center"/>
+        <TextBox x:Name="ipTextBox" Grid.Column="2" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalContentAlignment="Center"/>
+
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="Port:" VerticalAlignment="Center"/>
+        <TextBox x:Name="portTextBox" Grid.Column="2" Margin="0" Grid.Row="3" TextWrapping="Wrap" VerticalContentAlignment="Center"/>
+    </Grid>
+</Window>
