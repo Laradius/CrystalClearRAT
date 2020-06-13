@@ -13,7 +13,7 @@ namespace Zombie.Functions
 
         public static byte[] Generate(string commandOutput)
         {
-            return CommandDataSerializer.Serialize(CommandFlags.GenericCommandOutput, writer => writer.Write(commandOutput));
+            return CommandDataSerializer.Serialize(CommandFlags.GenericCommandOutput, (writer) => { writer.Write(commandOutput); });
         }
 
     }

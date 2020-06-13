@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace CrystalRATShared.Serialization
         {
 
             CommandFlags flag;
-
+            Console.WriteLine(Assembly.GetExecutingAssembly().FullName);
             using (MemoryStream ms = new MemoryStream(input))
             {
                 using (BinaryReader reader = new BinaryReader(ms, Encoding.UTF8))

