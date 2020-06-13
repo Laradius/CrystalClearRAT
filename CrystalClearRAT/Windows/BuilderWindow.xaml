@@ -3,7 +3,7 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:CrystalClearRAT.Windows" TitleCharacterCasing="Normal"
-        Title="File Builder" Height="300" Width="200"  WindowTitleBrush="#9b0000" Background="#FFE1E2E1">
+        Title="File Builder" Height="400" Width="350"  WindowTitleBrush="#9b0000" Background="#FFE1E2E1">
     <Grid>
         <Grid.RowDefinitions>
 
@@ -12,9 +12,16 @@
             <RowDefinition Height="10"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
@@ -22,15 +29,20 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"></ColumnDefinition>
-            <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Content="Build" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="9" Click="Button_Click"/>
+        <Button Content="Build" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="16" Click="BuildButton_Click"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="1" TextWrapping="Wrap" Text="IP:" VerticalAlignment="Center"/>
         <TextBox x:Name="ipTextBox" Grid.Column="2" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalContentAlignment="Center"/>
 
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="Port:" VerticalAlignment="Center"/>
         <TextBox x:Name="portTextBox" Grid.Column="2" Margin="0" Grid.Row="3" TextWrapping="Wrap" VerticalContentAlignment="Center"/>
+        <Button x:Name="selectIconButton" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Content="Select Icon File" Click="selectIconButton_Click"></Button>
+        <TextBlock TextWrapping="Wrap" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding FilePath}"></TextBlock>
+        <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center" >Stub Encryption Password:</TextBlock>
+        <TextBox x:Name="stubEncryptionPasswordTextBox" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="10"></TextBox>
+        <CheckBox x:Name="generateStubCheckbox" IsChecked="True" Content="Hide payload in stub" Grid.Column="1" HorizontalAlignment="Center"  Grid.Row="12" VerticalAlignment="Center"/>
     </Grid>
  </mah:MetroWindow>

