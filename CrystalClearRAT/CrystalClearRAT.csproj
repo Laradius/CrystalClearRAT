@@ -106,7 +106,10 @@
     <Compile Include="Functions\RemoteCMD.cs" />
     <Compile Include="Functions\Screenshot.cs" />
     <Compile Include="Helper\ComboboxItem.cs" />
+    <Compile Include="Helper\IconInjector.cs" />
     <Compile Include="Helper\ZombieBuilder.cs" />
+    <EmbeddedResource Include="Stub\RunPE.cs" />
+    <Compile Include="Stub\StubCompiler.cs" />
     <Compile Include="Web\Server.cs" />
     <Compile Include="Web\StateObject.cs" />
     <Compile Include="Windows\BuilderWindow.xaml.cs">

@@ -32,6 +32,7 @@ using System.IO;
 using Newtonsoft.Json;
 using CrystalClearRAT.Helper;
 using MahApps.Metro.Controls;
+using CrystalClearRAT.Stub;
 
 namespace CrystalClearRAT
 {
@@ -81,7 +82,8 @@ namespace CrystalClearRAT
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
 
-
+            // StubCompiler.Compile();
+            // IconInjector.ChangeIcon("foo.exe", "icon.ico");
         }
 
 
