@@ -30,6 +30,8 @@ namespace CrystalClearRAT.Windows
 
         private Zombie zombie;
         private string ID;
+        private bool autoScroll = true;
+        private bool firstMsg = true;
         public ChatWindow(Zombie zombie)
         {
             this.zombie = zombie;
@@ -51,7 +53,21 @@ namespace CrystalClearRAT.Windows
 
             if (args.ID == ID)
             {
-                Dispatcher.Invoke(() => { chatOutputTextBox.Text += "Zombie " + args.Message + Environment.NewLine; });
+                Dispatcher.Invoke(() =>
+                {
+
+                    if (firstMsg)
+                    {
+                        chatOutputTextBox.Text += "Zombie: " + args.Message;
+                        firstMsg = false;
+                    }
+                    else
+                    {
+                        chatOutputTextBox.Text += Environment.NewLine + "Zombie: " + args.Message;
+                    }
+
+
+                });
             }
         }
 
@@ -61,34 +77,37 @@ namespace CrystalClearRAT.Windows
             {
                 string text = chatInputTextBox.Text;
                 chatInputTextBox.Text = "";
-                chatOutputTextBox.Text += "Me: " + text + Environment.NewLine;
+                if (firstMsg)
+                {
+                    chatOutputTextBox.Text += "Me: " + text;
+                    firstMsg = false;
+                }
+                else
+                {
+                    chatOutputTextBox.Text += Environment.NewLine + "Me: " + text;
+                }
                 Server.Send(ChatMessage.Create(text, ID), zombie);
             }
         }
 
-        private Boolean AutoScroll = true;
+
 
         private void ScrollViewer_ScrollChanged(Object sender, ScrollChangedEventArgs e)
         {
-            // User scroll event : set or unset auto-scroll mode
+
             if (e.ExtentHeightChange == 0)
-            {   // Content unchanged : user scroll event
+            {
                 if (chatScroll.VerticalOffset == chatScroll.ScrollableHeight)
-                {   // Scroll bar is in bottom
-                    // Set auto-scroll mode
-                    AutoScroll = true;
+                {
+                    autoScroll = true;
                 }
                 else
-                {   // Scroll bar isn't in bottom
-                    // Unset auto-scroll mode
-                    AutoScroll = false;
+                {
+                    autoScroll = false;
                 }
             }
-
-            // Content scroll event : auto-scroll eventually
-            if (AutoScroll && e.ExtentHeightChange != 0)
-            {   // Content changed and auto-scroll mode set
-                // Autoscroll
+            if (autoScroll && e.ExtentHeightChange != 0)
+            {
                 chatScroll.ScrollToVerticalOffset(chatScroll.ExtentHeight);
             }
         }

