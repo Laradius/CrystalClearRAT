@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0067: Zdarzenie „BuilderWindow.PropertyChanged” nie jest nigdy używane
+dotnet_diagnostic.CS0067.severity = none

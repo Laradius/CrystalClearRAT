@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Configuration;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -17,6 +18,8 @@ namespace Zombie.Web
 {
     public static class Client
     {
+
+        public static event EventHandler ConnectionFailed;
 
         private static readonly Queue<Action> sendRequest = new Queue<Action>();
         private static readonly ManualResetEvent sendingDone = new ManualResetEvent(false);
@@ -37,6 +40,7 @@ namespace Zombie.Web
             Socket.Close();
             sendRequest.Clear();
             sendingDone.Set();
+            ConnectionFailed?.Invoke(null, EventArgs.Empty);
             Thread.Sleep(500);
             sendingDone.Reset();
             SocketInit();

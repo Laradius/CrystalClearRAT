@@ -32,6 +32,7 @@ namespace CrystalClearRAT.Windows
         private string ID;
         private bool autoScroll = true;
         private bool firstMsg = true;
+        private bool disconnected = false;
         public ChatWindow(Zombie zombie)
         {
             this.zombie = zombie;
@@ -44,7 +45,11 @@ namespace CrystalClearRAT.Windows
 
         private void OnDisconnected(object sender, EventArgs e)
         {
-            Dispatcher.Invoke(() => { this.Close(); });
+            Dispatcher.Invoke(() =>
+            {
+                disconnected = true;
+                this.Close();
+            });
         }
 
         private void OnMessageReceived(object sender, EventArgs e)
@@ -114,6 +119,10 @@ namespace CrystalClearRAT.Windows
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (!disconnected)
+            {
+                Server.Send(ChatMessage.CloseRequest(), zombie);
+            }
             FunctionManager.MessageReceived -= OnMessageReceived;
             ChatOpenedZombies.Remove(zombie);
         }

