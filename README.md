@@ -2,10 +2,10 @@
 
 CrystalClearRAT is a remote administration tool example. It is not by any means perfect, but my first serious project.
 
-UI:
+# UI:
 ![UIImg](https://i.imgur.com/h6FoHsf.png)
 
-Screen Control:
+# Screen Control:
 ![ScreenControlIMG](https://i.imgur.com/tPffxmN.png)
 
 
