@@ -80,6 +80,7 @@ namespace Zombie
             else
             {
                 e.Cancel = true;
+                return;
             }
         }
 

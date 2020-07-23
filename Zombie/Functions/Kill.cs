@@ -10,9 +10,12 @@ namespace Zombie.Functions
 {
     public static class Kill
     {
+        public static bool KillRequested = false;
+
 
         public static void Request()
         {
+            KillRequested = true;
             Application.Exit();
         }
 
